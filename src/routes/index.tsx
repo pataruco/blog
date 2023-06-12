@@ -7,7 +7,9 @@ import AllyContent, {
   meta as AllyMeta,
 } from '../pages/posts//ally-is-you-ally.mdx';
 
-console.log({ AllyMeta });
+const setPath = (string: string) => string.replaceAll(' ', '-').trim();
+
+console.log(setPath(AllyMeta.title));
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +21,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: AllyMeta.date,
+    path: `/posts/${setPath(AllyMeta.title)}`,
     element: (
       <Page>
         <AllyContent />
