@@ -9,7 +9,7 @@ const Blog = () => {
       {blogPostsMetaInformation.map(({ title, date, excerpt }) => {
         return (
           <article>
-            <Link to={`/posts/${setPath(title)}`}>
+            <Link to={setPath(title)}>
               <h3>{title}</h3>
             </Link>
             <p>

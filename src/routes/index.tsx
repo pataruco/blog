@@ -3,14 +3,23 @@ import { createBrowserRouter } from 'react-router-dom';
 import Page from '../components/page';
 import About from '../pages/about.mdx';
 import Blog from '../pages/blog';
-import AllyContent, {
-  // @ts-expect-error
-  meta as AllyMeta,
-} from '../pages/posts//ally-is-you-ally.mdx';
+import { blogPostsMetaInformation } from '../pages/posts';
 
-export const setPath = (string: string) => string.replaceAll(' ', '-').trim();
+export const setPath = (string: string) =>
+  `/posts/${string.replaceAll(' ', '-').trim().toLowerCase()}`;
 
-console.log(setPath(AllyMeta.title));
+const blogRoutes = blogPostsMetaInformation.map(
+  ({ content: Content, title }) => {
+    return {
+      path: setPath(title),
+      element: (
+        <Page>
+          <Content />
+        </Page>
+      ),
+    };
+  },
+);
 
 export const router = createBrowserRouter([
   {
@@ -29,12 +38,5 @@ export const router = createBrowserRouter([
       </Page>
     ),
   },
-  {
-    path: `/posts/${setPath(AllyMeta.title)}`,
-    element: (
-      <Page>
-        <AllyContent />
-      </Page>
-    ),
-  },
+  ...blogRoutes,
 ]);
