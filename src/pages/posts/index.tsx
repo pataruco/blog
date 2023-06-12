@@ -35,5 +35,6 @@ export const blogPostsMetaInformation = [
       date: new Date(post.date),
     };
   })
-
-  .sort(({ date: dateA }, { date: dateB }) => dateA > dateB);
+  .sort(
+    ({ date: dateA }, { date: dateB }) => dateA.getTime() - dateB.getTime(),
+  );
