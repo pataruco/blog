@@ -1,7 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Page from '../components/page';
-import About from '../pages/about';
+// @ts-expect-error
+import About, { meta } from '../pages/about.mdx';
+
+console.log({ meta });
 
 export const router = createBrowserRouter([
   {
