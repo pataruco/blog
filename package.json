@@ -1,12 +1,13 @@
 {
-  "name": "blog-next",
+  "name": "blog",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "pnpm rome check .",
+    "format": "pnpm rome format ."
   },
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
@@ -20,5 +21,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.3"
+  },
+  "devDependencies": {
+    "rome": "12.1.3"
   }
 }
