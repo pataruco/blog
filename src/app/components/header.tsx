@@ -3,12 +3,12 @@ import Link from 'next/link';
 const Header = () => (
   <header>
     <Link href="/">
-      <h1>Pataruco</h1>
+      <p>@pataruco</p>
     </Link>
     <nav>
       <ul>
         <li>
-          <Link href="/blog">Blog</Link>
+          <Link href="/blog">blog</Link>
         </li>
       </ul>
     </nav>
