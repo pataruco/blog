@@ -1,5 +1,4 @@
 import nextMDX from '@next/mdx';
-import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 
 /** @type {import('next').NextConfig} */
@@ -12,10 +11,7 @@ const nextConfig = {
 
 const withMDX = nextMDX({
   options: {
-    remarkPlugins: [
-      remarkGfm,
-      [remarkFrontmatter, { type: 'yaml', marker: '-' }],
-    ],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [],
     // If you use `MDXProvider`, uncomment the following line.
     // providerImportSource: "@mdx-js/react",

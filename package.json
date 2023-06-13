@@ -23,7 +23,6 @@
     "typescript": "5.1.3"
   },
   "devDependencies": {
-    "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",
     "rome": "12.1.3"
   },
