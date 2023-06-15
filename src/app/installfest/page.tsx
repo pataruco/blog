@@ -1,3 +1,9 @@
-export default function Installfest() {
-  return <h1>Installfest</h1>;
+'use client';
+
+import '@/styles/hightlight-atom-one-light.css';
+
+import Content from './post.mdx';
+
+export default function Page() {
+  return <Content />;
 }
