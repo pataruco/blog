@@ -1,4 +1,11 @@
 import { PostMeta } from '@/types';
-// @ts-expect-error
-import { meta } from './post.mdx';
-export const { title, excerpt, date }: PostMeta = meta;
+
+const meta: PostMeta = {
+  title: 'Teaching people with special needs how to code',
+  date: new Date('2021-01-19'),
+  excerpt:
+    'As part of a diversity and inclusion programme, we helped people with special needs to code.',
+  path: 'teaching-people-with-special-needs-how-to-code',
+};
+
+export default meta;
