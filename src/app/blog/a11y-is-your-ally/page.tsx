@@ -3,5 +3,9 @@
 import Content from './post.mdx';
 
 export default function Page() {
-  return <Content />;
+  return (
+    <article className="content">
+      <Content />
+    </article>
+  );
 }

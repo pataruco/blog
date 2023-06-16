@@ -275,13 +275,13 @@ body {
   min-height: 100vh;
 }
 
-main > * {
+/* main > * {
   margin: clamp(3rem, 1.8rem + 4vw, 5rem) 0;
   margin: var(--space-lg-xl) 0;
 }
 main > :last-child[data-block-flush] {
   margin-bottom: 0;
-}
+} */
 
 .navigation {
   display: none;
