@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import BrandLogo from './logo';
+
+import BrandLogo from '../logo';
+import './style.css';
 
 const createTimeStamp = () => {
   if (!process.env.NEXT_PUBLIC_TIMESTAMP) {
@@ -13,7 +15,6 @@ const createTimeStamp = () => {
     hour: 'numeric',
     minute: 'numeric',
     month: 'long',
-    second: 'numeric',
     timeZone: 'Europe/London',
     timeZoneName: 'short',
     year: 'numeric',
@@ -38,7 +39,7 @@ export const TimeStamp: React.FC = () => {
   if (timestamps) {
     const { printTimestamp, dateTimestamp } = timestamps;
     return (
-      <p>
+      <p className="timestamp">
         Updated at: <time dateTime={dateTimestamp}>{printTimestamp}</time>
       </p>
     );
@@ -59,13 +60,14 @@ const Footer = () => (
           <a href="https://github.com/pataruco">GitHub</a>
         </p>
       </div>
+      <div>
+        <h3 className="size-md font-bold">Contact me</h3>
+        <p>
+          <a href="mailto:pedro@martin-blanco.com">pedro@martin-blanco.com</a>
+        </p>
+      </div>
     </div>
-    <div className="footer-email">
-      <a href="mailto:pedro@martin-blanco.com">pedro@martin-blanco.com</a>
-    </div>
-    <div>
-      <TimeStamp />
-    </div>
+    <TimeStamp />
   </footer>
 );
 

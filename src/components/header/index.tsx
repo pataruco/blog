@@ -1,6 +1,7 @@
-'use client';
 import Link from 'next/link';
-import BrandLogo from './logo';
+
+import BrandLogo from '../logo';
+import './style.css';
 
 const Header = () => {
   return (

@@ -3,7 +3,7 @@ export default function Home() {
     <>
       <div className="content">
         <h1>Web developer and educator</h1>
-        <p>I helped to build and lead product tech teams.</p>
+        <p>I helped to build, teach and lead product tech teams.</p>
       </div>
       <div className="content">
         <h2 className="heading">About</h2>
