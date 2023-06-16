@@ -1,6 +1,8 @@
 const Footer = () => (
   <footer>
-    <p>footer</p>
+    <div className="wrapper">
+      <p>footer</p>
+    </div>
   </footer>
 );
 

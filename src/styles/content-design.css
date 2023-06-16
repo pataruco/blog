@@ -17,6 +17,9 @@
   --space-lg-xl: clamp(3rem, 1.8rem + 4vw, 5rem);
   --site-gutter: clamp(16px, -76.4px + 19.25vw, 170px);
   --site-offset: 0px;
+  --magenta: rgba(255, 0, 255, 100%);
+  --yellow: rgba(255, 255, 0, 100%);
+  --cyan: rgba(0, 255, 255, 100%);
 }
 
 *,
@@ -261,15 +264,15 @@ body {
   color: #000;
 }
 
-.wrapper {
+.site {
   background: #fff;
   margin: 0 auto auto;
   max-width: 80rem;
-  padding: 1px clamp(16px, -76.4px + 19.25vw, 170px);
   padding: 1px var(--site-gutter);
   width: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 main > * {
@@ -287,11 +290,16 @@ main > :last-child[data-block-flush] {
 }
 .header {
   align-items: center;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid;
   display: flex;
   justify-content: flex-end;
   padding: 5% 0 4%;
 }
+.header.active {
+  box-shadow: 0 1px 0 0 var(--cyan), 0 2px 0 0 var(--magenta),
+    0 3px 0 0 var(--yellow);
+}
+
 .header a {
   color: inherit;
   text-decoration: none;
