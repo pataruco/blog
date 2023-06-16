@@ -6,8 +6,13 @@ import { postsInfo } from './all-info';
 const Blog = () => {
   return (
     <>
-      <h1>Blog</h1>
-      <ul>
+      <div className="content">
+        <h1>Blog</h1>
+        <p>
+          My thoughts about building, teaching and leading product tech teams
+        </p>
+      </div>
+      <div>
         {postsInfo.map(({ date, excerpt, path, title }) => (
           <PostItem
             date={date}
@@ -17,7 +22,7 @@ const Blog = () => {
             title={title}
           />
         ))}
-      </ul>
+      </div>
     </>
   );
 };

@@ -40,7 +40,7 @@ export const TimeStamp: React.FC = () => {
     const { printTimestamp, dateTimestamp } = timestamps;
     return (
       <p className="timestamp">
-        Updated at: <time dateTime={dateTimestamp}>{printTimestamp}</time>
+        Updated on: <time dateTime={dateTimestamp}>{printTimestamp}</time>
       </p>
     );
   }
