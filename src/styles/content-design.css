@@ -314,7 +314,7 @@ main > :last-child[data-block-flush] {
   margin-left: 1em;
 }
 .footer {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid;
   font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
 }
 .footer .branding {

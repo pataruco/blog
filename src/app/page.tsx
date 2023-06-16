@@ -2,8 +2,25 @@ export default function Home() {
   return (
     <>
       <div className="content">
-        <h1>Pedro Martín Valera</h1>
-        <p>Web developer and educator</p>
+        <h1>Web developer and educator</h1>
+        <p>I helped to build and lead product tech teams.</p>
+      </div>
+      <div className="content">
+        <h2 className="heading">About</h2>
+        <p> Born and raised in Caracas, Venezuela.</p>
+        <p>
+          I started as a Science Teacher and Programme Director in Summer camps,
+          then joined a charity to improve social integration in the slums.
+        </p>
+        <p>
+          I arrived in London in 2013 and worked as a rope access technician to
+          save money for a Web Development course, which I finished at General
+          Assembly in 2015.
+        </p>
+        <p>They were crazy enough to hire me as a Teacher Assistant.</p>
+        <p>
+          I am still teaching as Lead Instructor, so the circle is completed.
+        </p>
       </div>
       <div className="content">
         <h2 className="heading">Career</h2>
