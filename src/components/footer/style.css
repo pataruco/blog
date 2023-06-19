@@ -1,0 +1,32 @@
+.footer {
+  border-top: 1px solid;
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
+}
+.footer .branding {
+  display: block;
+  margin: 2em 0;
+  width: 10.625em;
+}
+.footer hr ~ * {
+  font-size: 1rem;
+  margin: clamp(1rem, 0.475rem + 1.75vw, 1.875rem) 0;
+  text-align: left;
+}
+.footer-email {
+  font-size: 1.2em;
+  margin: 1em 0;
+}
+.footer-navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.footer-sections > * + * {
+  font-size: 1rem;
+}
+
+.footer .timestamp {
+  padding-top: 1rem;
+  font-size: 1rem;
+  border-top: 1px solid;
+}

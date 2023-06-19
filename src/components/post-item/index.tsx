@@ -8,16 +8,16 @@ export const PostItem: React.FC<PostMeta> = ({
   title,
 }) => {
   return (
-    <li>
+    <article className="entry">
       <Link href={`/blog/${path}`}>
         <h2>{title}</h2>
       </Link>
-      <p>
+      <p>{excerpt}</p>
+      <footer className="meta">
         <time dateTime={date.toISOString()}>
           {new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(date)}
         </time>
-      </p>
-      <p>{excerpt}</p>
-    </li>
+      </footer>
+    </article>
   );
 };

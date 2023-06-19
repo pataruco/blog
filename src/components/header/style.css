@@ -1,0 +1,28 @@
+.header {
+  align-items: center;
+  border-bottom: 1px solid;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5% 0 4%;
+}
+
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header .branding {
+  margin-right: auto;
+  max-width: 15.5rem;
+  min-width: 105px;
+  width: 33.3333333333%;
+}
+.header .branding ~ * {
+  margin-left: 1em;
+}
+
+.branding svg {
+  display: block;
+  height: auto;
+  width: 100%;
+}

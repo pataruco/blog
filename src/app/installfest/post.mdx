@@ -1,17 +1,15 @@
-# 💻 macOS Installfest
-
 ## Pre-install
 
-1. Identify which version of OSX you're using - ideally you should have Ventura or newer (13.3.x)
+1. Identify which version of OSX you're using - ideally, you should have Ventura or newer (13.4.x)
 2. Ensure that you've uninstalled any antivirus software you may have, as it can prevent some of the tools from installing properly
 
 ## Install Xcode Command Line Tools
 
-Xcode is a large suite of software development tools and libraries from Apple.
+Xcode is an extensive suite of software development tools and libraries from Apple.
 
-The Xcode Command Line Tools are part of Xcode. Installation of many common Unix-based tools requires the [GCC compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection).The Xcode Command Line Tools include a GCC compiler.
+The Xcode Command Line Tools are part of Xcode. Installation of many standard Unix-based tools requires the [GCC compiler](https://en.wikipedia.org/wiki/GNU_Compiler_Collection). The Xcode Command Line Tools include a GCC compiler.
 
-- Open terminal an type
+- Open the terminal and type
 
   ```sh
   xcode-select --install
@@ -30,17 +28,17 @@ The Xcode Command Line Tools are part of Xcode. Installation of many common Unix
 
 ## Text editor
 
-[Visual Studio](https://code.visualstudio.com/Download) Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js
+[Visual Studio](https://code.visualstudio.com/Download) Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. It comes with built-in support for JavaScript, TypeScript and Node.js.
 
 1. Download Visual Studio
-2. Move the app from downloads folder to application folder
+2. Move the app from the downloads folder to the application folder
 3. Open Visual studio
 4. Turn on **Settings sync**
    ![](https://code.visualstudio.com/assets/docs/editor/settings-sync/turn-on-sync.png)
 
 ## Terminal theme
 
-1. Create file called `one-dark.itermcolors` on the `~/Desktop` and open it
+1. Create a file called `one-dark.itermcolors` on the `~/Desktop` and open it
 
    ```sh
    code  ~/Desktop/one-dark.itermcolors
@@ -62,49 +60,49 @@ Packages are bundles of source code distributed by developers of software, which
 
 ### Install
 
-1. The package manager allows us to install and update software (like Ruby, Git, MongoDB, etc) from the command line:
+1. The package manager allows us to install and update software (like Ruby, Git, MongoDB, etc.) from the command line:
 2. Open [http://brew.sh/](http://brew.sh/), scroll down to Install Homebrew and copy+paste the command into the terminal.
 3. Ensure that Homebrew is raring to brew and fix any issues: `brew doctor`
 4. Update Homebrew: `brew update`
 
-(**Note**: the absolute paths will not be used after the next step, but might not be needed if they already have `/usr/local/bin` in their \$PATH)
+(**Note**: the absolute paths will not be used after the next step but might not be needed if they already have `/usr/local/bin` in their `\$PATH`)
 
 ## Zsh
 
 ### What is a shell?
 
-We will go into a bit more detail about the shell later on in the course but a shell is a very basic user interface for accessing an operating system's services.
+We will go into more detail about the shell later in the course. Still, a shell is a basic user interface for accessing an operating system's services.
 
 ### bash vs zsh
 
-Macs before OSX Catalina came shipped with a shell called 'bash' by default. Bash stands for **'Bourne-again shell'**, referring to its objective as a free replacement for the Bourne shell which was developed by [Steven Bourne](https://en.wikipedia.org/wiki/Stephen_R._Bourne).
+Macs before OSX Catalina were shipped with a 'bash' shell by default. Bash stands for **'Bourne-again shell'**, referring to its objective as a free replacement for the Bourne shell developed by [Steven Bourne](https://en.wikipedia.org/wiki/Stephen_R._Bourne).
 
 <details>
   <summary>
-    ⚠️ If you are using Catalina or a greater version skip these inside steps ⚠️
+    ⚠️ If you are using Catalina or a greater version, skip these inside steps ⚠️
   </summary>
 
-We are going to use another shell called zsh because it has some extra features to make our web-development easier.
+We will use another shell called zsh because it has extra features to make our web development easier.
 
-The American English pronunciation of Z is "zee", so Z shell rhymes with C shell, which sounds like seashell. zsh was also the login of the original developer Paul Falstad's Yale professor Zhong Shao.
+The American English pronunciation of Z is "zee", so Z shell rhymes with C shell, which sounds like a seashell. zsh was also the login of the original developer Paul Falstad's Yale professor Zhong Shao.
 
 #### Install
 
-1.  Type `brew install zsh` Type `0` if the prompt ask you about .zshrc
-2.  Type `zsh` . You should have a different prompt
-3.  Type `exit` to return to bash
-4.  Type `which zsh` to determine where your new shell has installed
-5.  Type `code /etc/shells` and add `/YOUR/PATH/TO/zsh`. (Lists trusted shells. The chsh command allows users to change their login shell only to shells listed in this file)
-6.  In a new tab, type `chsh -s /YOUR/PATH/TO/zsh`, then close and reopen your terminal application to This will enable zsh by default.
-7.  Type `echo $SHELL`. this should return `/YOUR/PATH/TO/zsh`
+1. Type `brew install zsh` Type `0` if the prompt asks you about .zshrc
+2. Type `zsh` . You should have a different prompt
+3. Type `exit` to return to bash
+4. Type `which zsh` to determine where your new shell has been installed
+5. Type `code /etc/shells` and add `/YOUR/PATH/TO/zsh`. (Lists trusted shells. The chsh command allows users to change their login shell only to shells listed in this file)
+6. In a new tab, type `chsh -s /YOUR/PATH/TO/zsh`, then close and reopen your terminal application. This will enable zsh by default.
+7. Type `echo $SHELL`. This should return `/YOUR/PATH/TO/zsh`
 
 </details>
 
 ## Oh-My-Zsh
 
-Oh My Zsh is an open source, community-driven framework for managing your zsh configuration. Here is the link to the [Github](https://github.com/robbyrussell/oh-my-zsh).
+Oh My Zsh is an open-source, community-driven framework for managing your zsh configuration. Here is the link to the [Github](https://github.com/robbyrussell/oh-my-zsh).
 
-The `PATH` environment variable is a colon-delimited list of directories that your shell searches through when you enter a command.
+The `PATH` environment variable is a colon-delimited list of directories your shell searches through when entering a command.
 
 1. Type
 
@@ -114,18 +112,18 @@ The `PATH` environment variable is a colon-delimited list of directories that yo
 
 2. Restart the terminal (close and open)
 
-3. Add following to `.zshrc` file to make VSCode the default text editor:
+3. Add the following to `.zshrc` file to make VSCode the default text editor:
 
    ```sh
    export EDITOR='code -w -n'
    export PAGER='less -f'
    ```
 
-4. 2. Restart the terminal (close and open) the prompt should be a tilde (**~**), and in colour.
+4. Restart the terminal (close and open). The prompt should be a tilde (**~**), and in colour.
 
 ### Increase ZSH history
 
-1. Add following to `.zshrc` file to increase ZSH history:
+1. Add the following to `.zshrc` file to increase ZSH history:
 
    ```sh
    # History
@@ -151,16 +149,16 @@ The `PATH` environment variable is a colon-delimited list of directories that yo
 1. Type
 
    ```sh
-   brew install starship
+   brew install Starship
    ```
 
-2. Add following to `.zshrc` to make Starship run on ZSH init
+2. Add the following to `.zshrc` to make Starship run on ZSH init
 
    ```sh
    eval "$(starship init zsh)"
    ```
 
-3. To get started configuring starship, create the following file:`~/.config/starship.toml`
+3. To get started configuring Starship, create the following file:`~/.config/starship.toml`
 
    ```toml
     # Don't print a new line at the start of the prompt
@@ -204,7 +202,7 @@ The `PATH` environment variable is a colon-delimited list of directories that yo
 
 ## Install [Bat 🦇](https://github.com/sharkdp/bat)
 
-A cat(1) clone with syntax highlighting and Git integration.
+A cat clone with syntax highlighting and Git integration.
 
 1. Type
    ```sh
@@ -213,11 +211,11 @@ A cat(1) clone with syntax highlighting and Git integration.
 
 ## Ruby Environment (Rbenv)
 
-A Ruby version manager, is a programme designed to manage multiple installations of Ruby on the same device.
+A Ruby version manager is a programme designed to manage multiple installations of Ruby on the same device.
 
 ### Rbenv vs Rvm
 
-There are two main Ruby version managers, Rbenv and rvm. Both have advantages and disadvantages. On this course we are going to be using rvm.
+There are two main Ruby version managers, Rbenv and rvm. Both have advantages and disadvantages. I use `rvm`
 
 **Note**: If a student does have rvm installed:
 
@@ -244,20 +242,20 @@ gem uninstall rvm
     echo 'export PATH=$HOME/.rbenv/shims:$PATH' >> ~/.zshrc
    ```
 4. Quit the current terminal (Cmd+Q)
-5. And then reopen the terminal application, ensuring there are no errors - you should be able to type `rbenv -v` and get a version number.
+5. Then reopen the terminal application, ensuring there are no errors - you should be able to type `rbenv -v` and get a version number.
 
 ### Install a version of Ruby with ruby-build
 
-Ruby-build is an rbenv plugin that provides an rbenv install command to compile and install different versions of Ruby on UNIX-like systems.
+Ruby-build is a rbenv plugin that provides a rbenv install command to compile and install different versions of Ruby on UNIX-like systems.
 
-1. OS X 10.9 comes with Ruby baked in, but it's version is not the latest one. We could upgrade that version of Ruby to a newer one, but what if we needed to run one version of Ruby for one app, and a different version for another?
+1. OS X 10.9 comes with Ruby baked in, but its version is a newer one. We could upgrade that version of Ruby to a newer one, but what if we needed to run one version of Ruby for one app and a different version for another?
 2. Install Ruby 2.2.3. This is the latest stable version of Ruby:
    `rbenv install 2.2.3`
 3. This is required every time we install a new Ruby or install a gem with a binary:
    `rbenv rehash`
 4. Set the global Ruby to the one we've just installed, which is a sensible default:
    `rbenv global 2.2.3`
-5. Test you have the right version with `ruby -v`
+5. Test you have the correct version with `ruby -v`
 
 ### Skip gem rdoc generation
 
@@ -267,7 +265,7 @@ Whenever we install a gem, it also installs a bunch of documentation we probably
 echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
 ```
 
-### Bundler
+## Bundler
 
 Bundler manages Ruby gems per-project/application, and makes it trivial to install all the dependencies for an application:
 
@@ -297,7 +295,7 @@ If you install a gem that includes 'binaries' (or any generally available comman
 
 ## Install python
 
-> Check the latest [python](https://www.python.org/downloads/) version and replace the semver number
+Check the latest [python](https://www.python.org/downloads/) version and replace the semver number
 
 1. Install
    ```sh
@@ -307,7 +305,7 @@ If you install a gem that includes 'binaries' (or any generally available comman
    ```sh
    pyenv global 3.11.1
    ```
-3. Python doesn't ship with the most up to date version of package manager pip, so upgrade pip
+3. Python doesn't ship with the most up-to-date version of package manager pip, so upgrade pip
    ```sh
    pip install -upgrade pip
    ```
@@ -328,7 +326,7 @@ If you install a gem that includes 'binaries' (or any generally available comman
    nvm ls-remote
    ```
 
-   - And you will be shown a list of all the available versions of node
+   - And you will be shown a list of all the available Node versions
 
 4. Install the latest version of node and the current **Long term support** (_LTS_)
    ```sh
@@ -343,9 +341,9 @@ If you install a gem that includes 'binaries' (or any generally available comman
 
    - You should see the last version number that you've installed
 
-6. To use `nvm use` automatically in a directory with a `.nvmrc` file add [this script](https://github.com/nvm-sh/nvm#zsh) to `.zshrc`
+6. To use `nvm use` automatically in a directory with a `.nvmrc` file, add [this script](https://github.com/nvm-sh/nvm#zsh) to `.zshrc`
 
-## Install PNPM
+## Install pnpm
 
 1. Install pnpm
 
@@ -360,9 +358,9 @@ If you install a gem that includes 'binaries' (or any generally available comman
 
 ## Prettier
 
-### Create `.prettierrc.json` file
+- Create `.prettierrc.json` file
 
-- Let define some rules for `prettier`
+- Let's define some rules for `prettier`
 
   ```sh
   code ~/.prettierrc
@@ -413,7 +411,7 @@ Git is the version control system that we will use throughout the course. It is 
 
 ### Git Multiple identities
 
-Instead to have a global user email, we can set a different identity per repo.
+Instead of having a global user email, we can set a different identity per repo.
 
 1. Reset global user email
    ```sh
@@ -426,13 +424,13 @@ Instead to have a global user email, we can set a different identity per repo.
    ```
 
 3. Add email to your GitHub account [emails](https://github.com/settings/emails)
-4. Before the first commit on repo
+4. Before the first commit on the repo
 
    ```sh
    git config --local --add user.email mail@example.com
    ```
 
-### Git set default branch to be `main`
+### Git set the default branch to be `main`
 
 ```sh
 git config --global init.defaultBranch main
@@ -440,13 +438,13 @@ git config --global init.defaultBranch main
 
 ## `git show` plugin [(Delta)](https://github.com/dandavison/delta)
 
-> Delta provides language syntax-highlighting, within-line insertion/deletion detection, and restructured diff output for git on the command line.
+> Delta provides language syntax highlighting, within-line insertion/deletion detection, and restructured diff output for git on the command line.
 
 1. Install via brew
    ```sh
    brew install git-delta
    ```
-2. Configure git to use delta adding the following to `.gitconfig`:
+2. Configure git to use delta by adding the following to `.gitconfig`:
 
    ```toml
     [core]
@@ -489,13 +487,13 @@ git-clean(){
 
 ## Global `.gitignore`
 
-There are a few files that we don't want Git to track. We can specifically ignore them by adding the files to a global `.gitignore` file.
+There are a few files that we don't want Git to track. We can ignore them by adding the files to a global `.gitignore` file.
 
 ### .DS_Store files
 
-`.DS_Store` files are used by Mac OS X to store folder specific metadata information. They are different for every mac, it means that they often cause conflicts in version controlled folders.
+`.DS_Store` files are used by Mac OS X to store folder-specific metadata information. They are different for every Mac, so they often cause conflicts in version-controlled folders.
 
-Since we never want to track .DS_Store files, we can make a global `.gitignore` file, and tell git to use it for all repositories:
+Since we never want to track. `DS_Store` files, we can make a global `.gitignore` file and tell Git to use it for all repositories:
 
 ```sh
 echo .DS_Store >> ~/.gitignore_global
@@ -504,7 +502,7 @@ git config --global core.excludesfile ~/.gitignore_global
 
 ### public/uploads/, node_modules & bower_components
 
-In the same way, we want to never track the contents of our uploads folder in Rails (which usually contain images or media that we have uploaded during testing) or our node_modules or bower_components.
+In the same way, we want to never track the contents of our uploads folder in Rails (which usually contain images or media we uploaded during testing) or our node_modules or bower_components.
 
 ```sh
 echo "/public/uploads/\nnode_modules/\nbower_components/" >> ~/.gitignore_global
@@ -512,26 +510,26 @@ echo "/public/uploads/\nnode_modules/\nbower_components/" >> ~/.gitignore_global
 
 ### autocorrect
 
-Enable auto-correct the suggested command will run after a short delay to give you the chance to cancel the command if it is not what you intended
+Enable auto-correct. The suggested command will run after a short delay to give you a chance to cancel the command if it is not what you intended
 
 ```sh
 git config --global help.autocorrect 20
 ```
 
-## Configure SSH keys on Github
+## Configure SSH keys on GitHub
 
-GitHub is a web-based Git repository hosting service. It allows us to keep a remote version of our version-controlled projects. When we push and pull from Git, we don't want to always have to login to verify who we are. Therefore, what we can do is generate and use something called an SSH key. SSH keys are a way to identify trusted computers, without involving passwords.
+GitHub is a web-based Git repository hosting service. It allows us to keep a remote version of our version-controlled projects. When we push and pull from Git, we don't want to always have to log in to verify who we are. Therefore, we can generate and use something called an SSH key. SSH keys are a way to identify trusted computers without involving passwords.
 
-1. First, we need to check for existing SSH keys on your computer. Open up your Terminal and type:
+1. First, we need to check for existing SSH keys on your computer. Open up your terminal and type:
    ```sh
    ls -al ~/.ssh
    ```
-   Check the directory listing to see if you have files named either **id_rsa.pub** or **id_dsa.pub**. If you have either of those files you can skip to the step 'add your SSH key to Github'.
+   Check the directory listing to see if you have files named **id_rsa.pub** or **id_dsa.pub**. If you have either of those files, you can skip to the step 'add your SSH key to GitHub.
 2. Generate a new SSH key
    ```sh
     ssh-keygen -t rsa -C "your_email@example.com"
    ```
-3. You'll be prompted for a file to save the key, and a passphrase. Press enter for both steps (default name, and no passphrase)
+3. You'll be prompted for a file to save the key and a passphrase. Press enter for both steps (default name and no passphrase)
 4. Then add your new key to the ssh-agent:
    ```sh
     ssh-add ~/.ssh/id_rsa
@@ -541,7 +539,7 @@ GitHub is a web-based Git repository hosting service. It allows us to keep a rem
    ```sh
     pbcopy < ~/.ssh/id_rsa.pub
    ```
-7. On Github, create a descriptive title for your key, an paste into the `key` field - _do not add or remove and characters or whitespace to the key_
+7. On Github, create a descriptive title for your key an paste it into the `key` field - _do not add or remove characters or whitespace to the key_
 8. Click `Add key` and check everything works in the terminal by typing:
    ```sh
     ssh -T git@github.com
@@ -553,7 +551,7 @@ GitHub is a web-based Git repository hosting service. It allows us to keep a rem
    ```sh
     pbcopy < ~/.ssh/id_rsa.pub
    ```
-2. On Github, create a descriptive title for your key, an paste into the `key` field - _do not add or remove and characters or whitespace to the key_
+2. On Github, create a descriptive title for your key and paste it into the `key` field - _do not add or remove characters or whitespace to the key_
 3. Select the type of key to be `Signing Key`.
 4. Click `Add key`
 5. Configure Git to use SSH to sign commits and tags
@@ -561,14 +559,14 @@ GitHub is a web-based Git repository hosting service. It allows us to keep a rem
    git config --global commit.gpgsign true
    git config --global gpg.format ssh
    ```
-6. To set your SSH signing key in Git with the path to the public key you'd like to use.
+6. Set your SSH signing key in Git with the path to the public key you'd like to use.
    ```sh
    git config --global user.signingkey ~/.ssh/id_rsa.pub
    ```
 
 ## Speed up your cursor
 
-During the course, we will be doing a lot of navigating using our keyboards. By default, the speed of the curson on a Mac is a little too slow. Let's increase the speed of the cursor by going to:
+During the course, we will do a lot of navigating using our keyboards. By default, the speed of the cursor on a Mac is a little too slow. Let's increase the speed of the cursor by going to:
 
 ```
 System Preferences > Keyboard

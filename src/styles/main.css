@@ -4,12 +4,10 @@
 
 html {
   font-size: 100%;
+  background-color: white;
 }
 
 body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 picture {
