@@ -862,9 +862,9 @@ p img {
   .navigation-menu > li + li {
     margin-left: 1em;
   }
-  .navigation-menu > li:nth-last-child(2) {
+  /* .navigation-menu > li:nth-last-child(2) {
     margin-left: auto;
-  }
+  } */
   .navigation-menu > li > a {
     font-size: 1em;
     padding: 0.75em 0;
