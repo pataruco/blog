@@ -3,12 +3,12 @@
 import { PostItem } from '@/components/post-item';
 import { postsInfo } from './all-info';
 
-import { BlogPosting, WithContext } from 'schema-dts';
+import { ItemPage, WithContext } from 'schema-dts';
 
 const Blog = () => {
-  const jsonLd: WithContext<BlogPosting> = {
+  const jsonLd: WithContext<ItemPage> = {
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    '@type': ' ItemPage',
     name: 'Blog',
     description:
       'My thoughts about building, teaching and leading product tech teams',
