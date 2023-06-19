@@ -5,20 +5,20 @@ import { postsInfo } from './all-info';
 
 import { BlogPosting, WithContext } from 'schema-dts';
 
-const jsonLd: WithContext<BlogPosting> = {
-  '@context': 'https://schema.org',
-  '@type': 'BlogPosting',
-  name: 'Blog',
-  description:
-    'My thoughts about building, teaching and leading product tech teams',
-  url: 'https://pataruco.dev/blog',
-  author: {
-    '@type': 'Person',
-    name: 'Pedro Martin Valera',
-  },
-};
-
 const Blog = () => {
+  const jsonLd: WithContext<BlogPosting> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    name: 'Blog',
+    description:
+      'My thoughts about building, teaching and leading product tech teams',
+    url: 'https://pataruco.dev/blog',
+    author: {
+      '@type': 'Person',
+      name: 'Pedro Martin Valera',
+    },
+  };
+
   return (
     <>
       <script
