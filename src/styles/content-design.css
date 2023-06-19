@@ -225,8 +225,7 @@ strong {
   font-weight: 600;
 }
 a {
-  color: #00599f;
-  color: var(--link-color, #00599f);
+  color: var(--link-color, #333);
 }
 a:hover {
   text-decoration: none;
@@ -259,10 +258,10 @@ blockquote:before {
 blockquote > :last-child:after {
   content: '”';
 }
-body {
+/* body {
   background: #e5e5e5;
   color: #000;
-}
+} */
 
 .site {
   background: #fff;
