@@ -7,6 +7,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  poweredByHeader: false,
 };
 
 const withMDX = nextMDX({

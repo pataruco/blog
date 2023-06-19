@@ -1,3 +1,11 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Pedro Martín Valera',
+  description:
+    'I am a Web developer and educator. I help to build, teach and lead product tech teams.',
+};
+
 export default function Home() {
   return (
     <>
