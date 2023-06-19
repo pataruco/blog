@@ -20,6 +20,7 @@
   --magenta: rgba(255, 0, 255, 100%);
   --yellow: rgba(255, 255, 0, 100%);
   --cyan: rgba(0, 255, 255, 100%);
+  --code-background: #fafafa;
 }
 
 *,
@@ -30,7 +31,7 @@
 
 article,
 aside,
-code,
+/* code, */
 details,
 figcaption,
 figure,
@@ -281,6 +282,11 @@ blockquote > :last-child:after {
 main > :last-child[data-block-flush] {
   margin-bottom: 0;
 } */
+
+code {
+  background-color: var(--code-background);
+  padding: 0.5em;
+}
 
 .navigation {
   display: none;
