@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { WebSite, WithContext } from 'schema-dts';
 
 export const metadata: Metadata = {
   title: 'Pedro Martín Valera',
@@ -6,9 +7,22 @@ export const metadata: Metadata = {
     'I am a Web developer and educator. I help to build, teach and lead product tech teams.',
 };
 
+const jsonLd: WithContext<WebSite> = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  about: 'Pedro Martín Valera',
+  url: 'https://pataruco.dev',
+};
+
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // rome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="content">
         <h1>Web developer and educator</h1>
         <p>I help to build, teach and lead product tech teams.</p>
