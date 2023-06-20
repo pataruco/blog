@@ -1,3 +1,4 @@
+import { BASE_URL, author } from '@/utils/metadata';
 import { Metadata } from 'next';
 import { ProfilePage, WithContext } from 'schema-dts';
 
@@ -13,11 +14,8 @@ export default function Home() {
     '@type': 'ProfilePage',
     about: 'Pedro Martín Valera',
     description: 'I help to build, teach and lead product tech teams.',
-    url: 'https://pataruco.dev',
-    author: {
-      '@type': 'Person',
-      name: 'Pedro Martin Valera',
-    },
+    url: BASE_URL,
+    author,
   };
   return (
     <>

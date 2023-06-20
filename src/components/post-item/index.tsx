@@ -1,4 +1,5 @@
 import { PostMeta } from '@/types';
+import { BASE_URL, author } from '@/utils/metadata';
 import Link from 'next/link';
 
 import { BlogPosting, WithContext } from 'schema-dts';
@@ -14,11 +15,8 @@ export const PostItem: React.FC<PostMeta> = ({
     '@type': 'BlogPosting',
     name: title,
     description: excerpt,
-    url: `https://pataruco.dev/blog/${path}`,
-    author: {
-      '@type': 'Person',
-      name: 'Pedro Martin Valera',
-    },
+    url: `${BASE_URL}/blog/${path}`,
+    author,
     datePublished: date.toISOString(),
   };
 
