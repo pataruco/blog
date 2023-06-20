@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { WebSite, WithContext } from 'schema-dts';
+import { ProfilePage, WithContext } from 'schema-dts';
 
 export const metadata: Metadata = {
   title: 'Pedro Martín Valera',
@@ -7,14 +7,17 @@ export const metadata: Metadata = {
     'I am a Web developer and educator. I help to build, teach and lead product tech teams.',
 };
 
-const jsonLd: WithContext<WebSite> = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  about: 'Pedro Martín Valera',
-  url: 'https://pataruco.dev',
-};
-
 export default function Home() {
+  const jsonLd: WithContext<ProfilePage> = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    about: 'Pedro Martín Valera',
+    url: 'https://pataruco.dev',
+    author: {
+      '@type': 'Person',
+      name: 'Pedro Martin Valera',
+    },
+  };
   return (
     <>
       <script

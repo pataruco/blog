@@ -3,16 +3,14 @@
 import { PostItem } from '@/components/post-item';
 import { postsInfo } from './all-info';
 
-import { ItemPage, WithContext } from 'schema-dts';
+import { Blog, WithContext } from 'schema-dts';
 
-const Blog = () => {
-  const jsonLd: WithContext<ItemPage> = {
+const BlogComponent = () => {
+  const jsonLd: WithContext<Blog> = {
     '@context': 'https://schema.org',
-    '@type': ' ItemPage',
-    name: 'Blog',
-    description:
-      'My thoughts about building, teaching and leading product tech teams',
-    url: 'https://pataruco.dev/blog',
+    '@type': 'Blog',
+    about:
+      ' My thoughts about building, teaching and leading product tech teams',
     author: {
       '@type': 'Person',
       name: 'Pedro Martin Valera',
@@ -47,4 +45,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default BlogComponent;
