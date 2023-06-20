@@ -8,8 +8,6 @@ import { about, author } from '@/utils/metadata';
 import { Blog, WithContext } from 'schema-dts';
 
 const BlogComponent = () => {
-  // generateRss();
-
   const jsonLd: WithContext<Blog> = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
