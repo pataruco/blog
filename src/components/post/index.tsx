@@ -2,6 +2,8 @@ import { PostMeta } from '@/types';
 import { MDXProps } from 'mdx/types';
 import { BlogPosting, WithContext } from 'schema-dts';
 
+import './style.css';
+
 interface PostParams extends PostMeta {
   Content: (props: MDXProps) => JSX.Element;
 }
@@ -25,7 +27,7 @@ const Post: React.FC<PostParams> = ({
   };
 
   return (
-    <>
+    <article className="blog-post">
       <script
         type="application/ld+json"
         // rome-ignore lint/security/noDangerouslySetInnerHtml: We are inserting microdata as per Next.js docs https://nextjs.org/docs/app/building-your-application/optimizing/metadata#json-ld
@@ -38,7 +40,7 @@ const Post: React.FC<PostParams> = ({
         </time>
       </div>
       <Content />
-    </>
+    </article>
   );
 };
 

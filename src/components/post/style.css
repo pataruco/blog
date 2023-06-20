@@ -1,0 +1,10 @@
+.blog-post blockquote,
+.blog-post,
+h1 ~ p:first-of-type:not(blockquote + p) {
+  font-size: unset;
+  font-size: unset;
+  font-weight: unset;
+  letter-spacing: unset;
+  line-height: unset;
+  margin-bottom: unset;
+}
