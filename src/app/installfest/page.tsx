@@ -1,7 +1,7 @@
 'use client';
 import { WebPage, WithContext } from 'schema-dts';
 
-import '@/styles/hightlight-atom-one-light.css';
+import '@/styles/highlight-a11y-light.css';
 
 import Content from './post.mdx';
 

@@ -12,6 +12,7 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
     about: 'Pedro Martín Valera',
+    description: 'I help to build, teach and lead product tech teams.',
     url: 'https://pataruco.dev',
     author: {
       '@type': 'Person',

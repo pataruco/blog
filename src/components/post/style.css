@@ -1,0 +1,10 @@
+.blog-post,
+.blog-post,
+h1 ~ p:first-of-type {
+  font-size: unset;
+  font-size: unset;
+  font-weight: unset;
+  letter-spacing: unset;
+  line-height: unset;
+  margin-bottom: unset;
+}
