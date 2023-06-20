@@ -1,6 +1,6 @@
-.blog-post blockquote,
 .blog-post,
-h1 ~ p:first-of-type:not(blockquote + p) {
+.blog-post,
+h1 ~ p:first-of-type {
   font-size: unset;
   font-size: unset;
   font-weight: unset;

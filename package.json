@@ -4,12 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "bash ./timestamp.sh && next dev",
-    "build": "next build",
+    "build": "bash ./timestamp.sh && next build",
     "start": "next start",
     "lint": "pnpm rome check .",
-    "format": "pnpm rome format .",
-    "prebuild": "bash ./timestamp.sh",
-    "prestart": "bash ./timestamp.sh"
+    "format": "pnpm rome format ."
   },
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
