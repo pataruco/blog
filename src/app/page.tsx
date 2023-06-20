@@ -1,6 +1,31 @@
+import { Metadata } from 'next';
+import { ProfilePage, WithContext } from 'schema-dts';
+
+export const metadata: Metadata = {
+  title: 'Pedro Martín Valera',
+  description:
+    'I am a Web developer and educator. I help to build, teach and lead product tech teams.',
+};
+
 export default function Home() {
+  const jsonLd: WithContext<ProfilePage> = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    about: 'Pedro Martín Valera',
+    url: 'https://pataruco.dev',
+    author: {
+      '@type': 'Person',
+      name: 'Pedro Martin Valera',
+    },
+  };
   return (
     <>
+      <script
+        type="application/ld+json"
+        // rome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="content">
         <h1>Web developer and educator</h1>
         <p>I help to build, teach and lead product tech teams.</p>
