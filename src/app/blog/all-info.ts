@@ -1,5 +1,3 @@
-'use client';
-
 import { PostMeta } from '@/types';
 
 import a11yMeta from './a11y-is-your-ally/info';
