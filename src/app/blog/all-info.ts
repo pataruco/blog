@@ -7,7 +7,7 @@ import a11yInfluenceMeta from './how-we-might-influence-product-decision-makers-
 import quickAndDirtyMeta from './quick-and-dirty-and-I-like-it/info';
 import teachingMeta from './teaching-people-with-special-needs-how-to-code/info';
 
-export const postsInfo: PostMeta[] = [
+const postsInfo: PostMeta[] = [
   a11yMeta,
   a11yInfluenceMeta,
   teachingMeta,
@@ -15,3 +15,5 @@ export const postsInfo: PostMeta[] = [
 ].sort(({ date: dateA }, { date: dateB }) => {
   return dateB.getTime() - dateA.getTime();
 });
+
+export default postsInfo;

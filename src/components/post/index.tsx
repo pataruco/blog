@@ -2,6 +2,7 @@ import { PostMeta } from '@/types';
 import { MDXProps } from 'mdx/types';
 import { BlogPosting, WithContext } from 'schema-dts';
 
+import { BASE_URL, author } from '@/utils/metadata';
 import './style.css';
 
 interface PostParams extends PostMeta {
@@ -19,11 +20,8 @@ const Post: React.FC<PostParams> = ({
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     about: excerpt,
-    url: `https://pataruco.dev/blog/${path}`,
-    author: {
-      '@type': 'Person',
-      name: 'Pedro Martin Valera',
-    },
+    url: `${BASE_URL}/blog/${path}`,
+    author,
   };
 
   return (

@@ -1,20 +1,20 @@
 'use client';
 
 import { PostItem } from '@/components/post-item';
-import { postsInfo } from './all-info';
 
+import postsInfo from './all-info';
+
+import { about, author } from '@/utils/metadata';
 import { Blog, WithContext } from 'schema-dts';
 
 const BlogComponent = () => {
+  // generateRss();
+
   const jsonLd: WithContext<Blog> = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    about:
-      ' My thoughts about building, teaching and leading product tech teams',
-    author: {
-      '@type': 'Person',
-      name: 'Pedro Martin Valera',
-    },
+    about,
+    author,
   };
 
   return (
