@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import Footer, { createTimeStamp } from './index';
@@ -24,11 +24,13 @@ describe('Footer page', () => {
 
     const headings = screen.getAllByRole('heading', { level: 3 });
 
-    headings.map((heading) => {
-      expect(heading).toBeDefined();
+    const headingContents = ['Follow me', 'Contact me'];
+
+    headings.map((heading, index) => {
+      expect(within(heading).getByText(headingContents[index])).toBeDefined();
     });
-    expect.assertions(3);
 
     expect(screen.queryByTestId('timestamp')).toBeDefined();
+    expect.assertions(3);
   });
 });

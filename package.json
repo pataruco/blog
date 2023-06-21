@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@vitejs/plugin-react": "^4.0.1",
     "jsdom": "^22.1.0",
     "rehype-highlight": "^6.0.0",
