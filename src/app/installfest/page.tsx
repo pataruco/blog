@@ -1,7 +1,7 @@
 'use client';
+import '@/styles/highlight-a11y-light.css';
 import { WebPage, WithContext } from 'schema-dts';
 
-import '@/styles/highlight-a11y-light.css';
 import Content from './post.mdx';
 
 export default function Page() {
@@ -20,11 +20,11 @@ export default function Page() {
   return (
     <>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         // rome-ignore lint/security/noDangerouslySetInnerHtml: We are inserting microdata as per Next.js docs https://nextjs.org/docs/app/building-your-application/optimizing/metadata#json-ld
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="content">
+      <div className='content'>
         <h1>Installfest</h1>
         <p>
           "Installfest" is my personal setup to install applications that I

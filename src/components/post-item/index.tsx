@@ -20,9 +20,9 @@ export const PostItem: React.FC<PostMeta> = ({
   };
 
   return (
-    <article className="entry">
+    <article className='entry'>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         // rome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
@@ -30,7 +30,7 @@ export const PostItem: React.FC<PostMeta> = ({
         <h2>{title}</h2>
       </Link>
       <p>{excerpt}</p>
-      <footer className="meta">
+      <footer className='meta'>
         <time dateTime={date.toISOString()}>
           {new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(date)}
         </time>

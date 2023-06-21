@@ -25,14 +25,14 @@ const Post: React.FC<PostParams> = ({
   };
 
   return (
-    <article className="blog-post">
+    <article className='blog-post'>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         // rome-ignore lint/security/noDangerouslySetInnerHtml: We are inserting microdata as per Next.js docs https://nextjs.org/docs/app/building-your-application/optimizing/metadata#json-ld
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <h1>{title}</h1>
-      <div className="meta">
+      <div className='meta'>
         <time dateTime={date.toISOString()}>
           {new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(date)}
         </time>
