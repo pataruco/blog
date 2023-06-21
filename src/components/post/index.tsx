@@ -1,8 +1,8 @@
 import { PostMeta } from '@/types';
+import { BASE_URL, author } from '@/utils/metadata';
 import { MDXProps } from 'mdx/types';
 import { BlogPosting, WithContext } from 'schema-dts';
 
-import { BASE_URL, author } from '@/utils/metadata';
 import './style.css';
 
 interface PostParams extends PostMeta {

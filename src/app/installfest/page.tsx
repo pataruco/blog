@@ -2,7 +2,6 @@
 import { WebPage, WithContext } from 'schema-dts';
 
 import '@/styles/highlight-a11y-light.css';
-
 import Content from './post.mdx';
 
 export default function Page() {

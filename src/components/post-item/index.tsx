@@ -1,7 +1,6 @@
 import { PostMeta } from '@/types';
 import { BASE_URL, author } from '@/utils/metadata';
 import Link from 'next/link';
-
 import { BlogPosting, WithContext } from 'schema-dts';
 
 export const PostItem: React.FC<PostMeta> = ({

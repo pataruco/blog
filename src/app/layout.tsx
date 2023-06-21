@@ -1,10 +1,9 @@
-import { Analytics } from '@vercel/analytics/react';
-import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import '@/styles/index.css';
+import { Analytics } from '@vercel/analytics/react';
+import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'Pedro Martin Valera',
