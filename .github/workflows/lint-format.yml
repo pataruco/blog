@@ -48,5 +48,5 @@ jobs:
       - name: run linter 🔎
         run: pnpm run lint
 
-      # - name: run tests 🧪
-      #   run: pnpm test
+      - name: run tests 🧪
+        run: pnpm test

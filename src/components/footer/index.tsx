@@ -3,7 +3,7 @@ import Link from 'next/link';
 import BrandLogo from '../logo';
 import './style.css';
 
-const createTimeStamp = () => {
+export const createTimeStamp = () => {
   if (!process.env.NEXT_PUBLIC_TIMESTAMP) {
     return null;
   }
@@ -39,7 +39,7 @@ export const TimeStamp: React.FC = () => {
   if (timestamps) {
     const { printTimestamp, dateTimestamp } = timestamps;
     return (
-      <p className='timestamp'>
+      <p className='timestamp' data-testid='timestamp'>
         Updated on: <time dateTime={dateTimestamp}>{printTimestamp}</time>
       </p>
     );
