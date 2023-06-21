@@ -1,5 +1,7 @@
 'use client';
+
 import '@/styles/highlight-a11y-light.css';
+import { author } from '@/utils/metadata';
 import { WebPage, WithContext } from 'schema-dts';
 
 import Content from './post.mdx';
@@ -11,10 +13,7 @@ export default function Page() {
     about:
       '"Installfest" is my personal setup to install applications that I consider essential for software development.',
     url: 'https://pataruco.dev/installfest',
-    author: {
-      '@type': 'Person',
-      name: 'Pedro Martin Valera',
-    },
+    author,
   };
 
   return (

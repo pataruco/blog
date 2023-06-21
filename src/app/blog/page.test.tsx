@@ -1,8 +1,8 @@
+import { about, author } from '@/utils/metadata';
 import { render } from '@testing-library/react';
 import { Blog, WithContext } from 'schema-dts';
 import { describe, expect, it } from 'vitest';
 
-import { about, author } from '@/utils/metadata';
 import BlogComponent from './page';
 
 describe('Blog index', () => {
