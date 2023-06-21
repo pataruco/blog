@@ -1,10 +1,9 @@
-import { Analytics } from '@vercel/analytics/react';
-import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import '@/styles/index.css';
+import { Analytics } from '@vercel/analytics/react';
+import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'Pedro Martin Valera',
@@ -22,9 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang='en' className={inter.className}>
       <body>
-        <div className="site">
+        <div className='site'>
           <Header />
           <main>{children}</main>
           <Footer />

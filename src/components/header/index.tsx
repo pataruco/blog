@@ -20,26 +20,26 @@ const Header = () => {
 
   return (
     <header className={navigationIsOpen ? 'has-nav' : ''}>
-      <div className="header">
-        <Link href="/" title="Pedro Martin Valera" className="branding">
+      <div className='header'>
+        <Link href='/' title='Pedro Martin Valera' className='branding'>
           <BrandLogo />
         </Link>
         <button
-          type="button"
-          aria-label="Toggle navigation"
-          className="navigation-toggle"
+          type='button'
+          aria-label='Toggle navigation'
+          className='navigation-toggle'
           onClick={handleClick}
         >
           <NavigationToggle />
         </button>
       </div>
-      <nav className="navigation">
-        <ul className="navigation-menu mask-links">
+      <nav className='navigation'>
+        <ul className='navigation-menu mask-links'>
           <li className={path === '/blog' ? 'is-active' : ''}>
-            <Link href="/blog">Blog</Link>
+            <Link href='/blog'>Blog</Link>
           </li>
           <li className={path === '/installfest' ? 'is-active' : ''}>
-            <Link href="/installfest">Installfest</Link>
+            <Link href='/installfest'>Installfest</Link>
           </li>
         </ul>
       </nav>

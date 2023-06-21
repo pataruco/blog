@@ -3,7 +3,7 @@ import Link from 'next/link';
 import BrandLogo from '../logo';
 import './style.css';
 
-const createTimeStamp = () => {
+export const createTimeStamp = () => {
   if (!process.env.NEXT_PUBLIC_TIMESTAMP) {
     return null;
   }
@@ -39,7 +39,7 @@ export const TimeStamp: React.FC = () => {
   if (timestamps) {
     const { printTimestamp, dateTimestamp } = timestamps;
     return (
-      <p className="timestamp">
+      <p className='timestamp' data-testid='timestamp'>
         Updated on: <time dateTime={dateTimestamp}>{printTimestamp}</time>
       </p>
     );
@@ -48,22 +48,22 @@ export const TimeStamp: React.FC = () => {
 };
 
 const Footer = () => (
-  <footer className="footer">
-    <Link href="/" title="Pedro Martin Valera" className="branding">
+  <footer className='footer'>
+    <Link href='/' title='Pedro Martin Valera' className='branding'>
       <BrandLogo />
     </Link>
-    <div className="footer-sections | mask-links">
+    <div className='footer-sections | mask-links'>
       <div>
-        <h3 className="size-md font-bold">Follow me</h3>
+        <h3 className='size-md font-bold'>Follow me</h3>
         <p>
-          <a href="https://www.linkedin.com/in/pataruco/">LinkedIn</a> <br />
-          <a href="https://github.com/pataruco">GitHub</a>
+          <a href='https://www.linkedin.com/in/pataruco/'>LinkedIn</a> <br />
+          <a href='https://github.com/pataruco'>GitHub</a>
         </p>
       </div>
       <div>
-        <h3 className="size-md font-bold">Contact me</h3>
+        <h3 className='size-md font-bold'>Contact me</h3>
         <p>
-          <a href="mailto:hola@pataruco.dev">hola@pataruco.dev</a>
+          <a href='mailto:hola@pataruco.dev'>hola@pataruco.dev</a>
         </p>
       </div>
     </div>

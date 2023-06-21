@@ -1,7 +1,8 @@
 'use client';
-import { WebPage, WithContext } from 'schema-dts';
 
 import '@/styles/highlight-a11y-light.css';
+import { author } from '@/utils/metadata';
+import { WebPage, WithContext } from 'schema-dts';
 
 import Content from './post.mdx';
 
@@ -12,20 +13,17 @@ export default function Page() {
     about:
       '"Installfest" is my personal setup to install applications that I consider essential for software development.',
     url: 'https://pataruco.dev/installfest',
-    author: {
-      '@type': 'Person',
-      name: 'Pedro Martin Valera',
-    },
+    author,
   };
 
   return (
     <>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         // rome-ignore lint/security/noDangerouslySetInnerHtml: We are inserting microdata as per Next.js docs https://nextjs.org/docs/app/building-your-application/optimizing/metadata#json-ld
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="content">
+      <div className='content'>
         <h1>Installfest</h1>
         <p>
           "Installfest" is my personal setup to install applications that I
