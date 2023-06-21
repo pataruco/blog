@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Pedro Martín Valera',
   description:
     'I am a Web developer and educator. I help to build, teach and lead product tech teams.',
+  manifest: `${BASE_URL}/manifest.json`,
 };
 
 export default function Home() {
