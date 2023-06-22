@@ -35,5 +35,5 @@ jobs:
 
       - name: Show deployment URL
         run: |
-          vercel > deployment-url.txt
+          vercel --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
           cat deployment-url.txt
