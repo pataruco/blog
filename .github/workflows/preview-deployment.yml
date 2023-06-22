@@ -1,0 +1,34 @@
+name: Vercel preview deployment
+run-name: ${{ github.actor }} is deploying to vercel preview
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches-ignore:
+      - main
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint 🔎 & Format ✅
+        uses: ./.github/actions/lint-format
+        with:
+          working-directory: ./
+
+      - name: Pull Vercel environment information
+        shell: bash
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build project artifacts
+        shell: bash
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy project artifacts to Vercel
+        shell: bash
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
