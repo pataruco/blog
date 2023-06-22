@@ -32,8 +32,3 @@ jobs:
       - name: Deploy project artifacts to Vercel
         shell: bash
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Show deployment URL
-        run: |
-          vercel --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
-          cat deployment-url.txt
