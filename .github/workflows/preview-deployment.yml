@@ -8,47 +8,18 @@ on:
     branches-ignore:
       - main
 jobs:
-  lint-format-test:
-    uses: './.github/workflows/lint-format.yml'
-
-  deploy-Preview:
+  deploy-preview:
     runs-on: ubuntu-latest
-    needs: lint-format-test
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
         with:
-          node-version: lts/hydrogen
+          fetch-depth: 0
 
-      - name: Install pnpm
-        shell: bash
-        id: pnpm-install
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Lint 🔎 & Format ✅
+        uses: ./.github/actions/lint-format
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install Vercel CLI
-        shell: bash
-        run: |
-          pmpm setup
-          pnpm install --global vercel@latest
+          working-directory: ./
 
       - name: Pull Vercel environment information
         shell: bash

@@ -1,0 +1,55 @@
+name: Lint 🔎, Format ✅ & Test 🧪
+description: 'Lint and format TypeScript and JavaScript'
+inputs:
+  working-directory:
+    description: 'The path to the project to run CI for'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: lts/hydrogen
+
+    - name: Install pnpm
+      shell: bash
+      id: pnpm-install
+      run: |
+        corepack enable
+        corepack prepare pnpm@latest --activate
+
+    - name: Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      working-directory: .
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache@v3
+      name: Setup pnpm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
+      working-directory: ${{ inputs.working-directory }}
+
+    - name: run format
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: pnpm run format
+
+    - name: run linter
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: pnpm run lint
+
+    - name: run tests
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: pnpm run test
