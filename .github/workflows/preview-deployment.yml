@@ -22,13 +22,10 @@ jobs:
           working-directory: ./
 
       - name: Pull Vercel environment information
-        shell: bash
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build project artifacts
-        shell: bash
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy project artifacts to Vercel
-        shell: bash
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
