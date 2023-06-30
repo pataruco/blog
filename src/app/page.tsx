@@ -40,20 +40,30 @@ export default function Home() {
         <p>
           I began my career as a Science Teacher and Program Director at Summer
           Camps for children and young adults. I founded Paz con Todo, a charity
-          that aimed to improve social integration between social demographics
-          in Caracas.
+          that aimed to reduce violence in Caracas by improving social
+          integration in Caracas.
         </p>
 
         <p>
-          In 2013 I arrived in London, where I worked as a rope access
-          technician as I put myself through General Assembly's Web Development
-          course, which I completed in 2015.
+          In 2013 I arrived in London, where I worked as a{' '}
+          <a
+            href='https://www.theguardian.com/artanddesign/2015/jul/20/hanging-by-thread-rats-keep-skyscrapers-standing'
+            target='_blank'
+            rel='noreferrer'
+          >
+            rope access technician{' '}
+          </a>{' '}
+          as I put myself through General Assembly's Web Development course,
+          which I completed in 2015.
         </p>
 
         <p>
-          Upon graduation, they were crazy enough to invite me to join the
-          faculty. I began as a teaching assistant and am now a lead tutor on
-          the Front-end, JavaScript and Immersive courses.
+          Upon graduation, they were crazy enough to invite me to join the{' '}
+          <a href='https://generalassemb.ly/instructors/pedro-martin/7012'>
+            faculty
+          </a>
+          . I began as a teaching assistant and am now a lead tutor on the
+          Front-end, JavaScript and Immersive courses.
         </p>
       </div>
       <div className='content'>
