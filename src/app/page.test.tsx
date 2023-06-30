@@ -10,7 +10,7 @@ describe('Home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /Web developer and educator/i,
+        name: /I am Pedro Martin Valera/i,
       }),
     ).toBeDefined();
   });

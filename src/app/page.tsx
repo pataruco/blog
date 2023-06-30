@@ -27,24 +27,43 @@ export default function Home() {
       />
 
       <div className='content'>
-        <h1>Web developer and educator</h1>
-        <p>I help to build, teach and lead product tech teams.</p>
+        <h1>I am Pedro Martin Valera</h1>
+        <p>
+          Web developer and educator based in London. I help to build, teach and
+          lead product tech teams.
+        </p>
       </div>
       <div className='content'>
         <h2 className='heading'>About</h2>
-        <p> Born and raised in Caracas, Venezuela.</p>
+        <p>I was born and raised in Caracas, Venezuela.</p>
+
         <p>
-          I started as a Science Teacher and Programme Director in Summer camps,
-          then joined a charity to improve social integration in the slums.
+          I began my career as a Science Teacher and Program Director at Summer
+          Camps for children and young adults. I founded Paz con Todo, a charity
+          that aimed to reduce violence in Caracas by improving social
+          integration in Caracas.
         </p>
+
         <p>
-          I arrived in London in 2013 and worked as a rope access technician to
-          save money for a Web Development course, which I finished at General
-          Assembly in 2015.
+          In 2013 I arrived in London, where I worked as a{' '}
+          <a
+            href='https://www.theguardian.com/artanddesign/2015/jul/20/hanging-by-thread-rats-keep-skyscrapers-standing'
+            target='_blank'
+            rel='noreferrer'
+          >
+            rope access technician{' '}
+          </a>{' '}
+          as I put myself through General Assembly's Web Development course,
+          which I completed in 2015.
         </p>
-        <p>They were crazy enough to hire me as a Teacher Assistant.</p>
+
         <p>
-          I am still teaching as Lead Instructor, so the circle is completed.
+          Upon graduation, they were crazy enough to invite me to join the{' '}
+          <a href='https://generalassemb.ly/instructors/pedro-martin/7012'>
+            faculty
+          </a>
+          . I began as a teaching assistant and am now a lead tutor on the
+          Front-end, JavaScript and Immersive courses.
         </p>
       </div>
       <div className='content'>
