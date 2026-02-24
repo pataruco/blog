@@ -1,9 +1,9 @@
+import path from 'node:path';
 import { Feed } from 'feed';
 import fs from 'fs-extra';
 import { glob } from 'glob';
 import matter from 'gray-matter';
 import { Marked } from 'marked';
-import path from 'path';
 import { createHighlighter } from 'shiki';
 
 const BASE_URL = 'https://www.pataruco.dev';
@@ -337,8 +337,8 @@ async function run() {
     .map(
       (post) => `
   <url><loc>${BASE_URL}/${
-        post.path
-      }</loc><lastmod>${post.date.toISOString()}</lastmod></url>`,
+    post.path
+  }</loc><lastmod>${post.date.toISOString()}</lastmod></url>`,
     )
     .join('');
 
