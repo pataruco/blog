@@ -1,0 +1,77 @@
+name: PR validation
+run-name: ${{ github.actor }} is running PR validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - '!release-please--branches--main'
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - .release-please-manifest.json
+  merge_group:
+    types: [checks_requested]
+
+concurrency:
+  cancel-in-progress: true
+  group: '${{ github.workflow }} @ ${{ github.ref }}'
+
+jobs:
+  conventional-commits:
+    name: Conventional Commits
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Conventional Commits
+        uses: ./.github/actions/conventional-commits
+
+
+
+  lint:
+    name: Lint & format (web)
+    needs: [detect-changes]
+    if: needs.detect-changes.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set environment and install dependencies
+        uses: ./.github/actions/prepare
+
+      - name: Linting
+        shell: bash
+        run: pnpm lint
+
+  ci-validation:
+    name: CI validation
+    needs: [conventional-commits, lint]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v6
+
+      - name: Check jobs for errors
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: checkJobsForErrors } = await import('${{ github.workspace }}/.github/scripts/check-for-errors.mjs');
+            const jobs = ${{ toJSON(needs) }};
+            checkJobsForErrors({ core, jobs });
