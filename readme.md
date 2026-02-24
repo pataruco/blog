@@ -2,7 +2,18 @@
 
 ## What is it
 
-Is my website written in TypeScript, using [Next.js](https://nextjs.org/), and deployed into [Vercel](https://vercel.com/)
+My personal blog using Vanilla JS Web Components built with Static Site Generation (SSG) powered by Vite.
+
+## Architecture
+
+- Vanilla Web Components: Custom elements for the header, footer, and post items.
+- SSG Build Pipeline: A custom TypeScript script (`scripts/build.ts`) that:
+  - Parses Markdown content using `marked`.
+  - Highlights code blocks at build-time using `shiki`
+  - Generates RSS (RSS2) and Atom feeds using `feed`.
+  - Injects JSON-LD metadata for SEO.
+  - Statically pre-renders component shells to ensure visibility without JavaScript.
+
 
 ## Development
 
@@ -18,45 +29,51 @@ Install dependencies
 pnpm install
 ```
 
-Run local server
+Run local development server
 
 ```sh
 pnpm dev
 ```
 
-In your browser, navigate to http://localhost:3000/
+In your browser, navigate to http://localhost:5173/
 
-## Lint and formating
+## Build and Preview
 
-I am using [Rome tools](https://rome.tools/).
+Generate the static site:
 
-Lint
+```sh
+pnpm build
+```
+
+Preview the generated build:
+
+```sh
+pnpm preview
+```
+
+## Lint and Formatting
+
+I am using [Biome](https://biomejs.dev/).
 
 ```sh
 pnpm lint
-```
-
-Format
-
-```sh
 pnpm format
 ```
 
-## Test
+## Testing
 
-Run tests
+Run unit tests (Vitest):
 
 ```sh
 pnpm test
 ```
 
-## Deployment
-
-For a preview environment, create a pull request, and a GitHub Workflow will trigger the deployment.
-
-For a production environment, create a Git tag with the following pattern `R.*` and push it to the main branch
+Run verification and accessibility tests (Playwright):
 
 ```sh
-git tag R.<SEMVER NUMBER>
-git push --tags
+npx playwright test
 ```
+
+## Deployment
+
+The site is fully static and can be deployed to any static hosting provider (Vercel, GitHub Pages, Netlify, etc.) by serving the contents of the `dist/` directory.
