@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/pataruco/blog/compare/blog-v1.1.1...blog-v1.1.2) (2026-02-24)
+
+
+### Bug Fixes
+
+* build ([bf349a2](https://github.com/pataruco/blog/commit/bf349a2d6f412c85c66e36f002af8a7f9e419730))
+* build ([9db3957](https://github.com/pataruco/blog/commit/9db39575491e3d7d012d4ab6cfa835910abef694))
+
 ## [1.1.1](https://github.com/pataruco/blog/compare/blog-v1.1.0...blog-v1.1.1) (2026-02-24)
 
 
