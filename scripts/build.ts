@@ -7,6 +7,8 @@ import { Marked } from 'marked';
 import { createHighlighter } from 'shiki';
 
 const BASE_URL = 'https://www.pataruco.dev';
+// Path prefix for deployment (e.g., '/blog/' for GitHub Pages, '/' for custom domain)
+const BASE_PATH = process.env.BASE_PATH || '/blog/';
 const AUTHOR = {
   name: 'Pedro Martin Valera',
   email: 'hola@pataruco.dev',
@@ -48,8 +50,8 @@ async function run() {
   // Find the JS and CSS files from the manifest
   // Vite 6+ manifest structure
   const indexHtml = manifest['index.html'];
-  const mainJsPath = `/${indexHtml.file}`;
-  const mainCss = indexHtml.css ? `/${indexHtml.css[0]}` : '';
+  const mainJsPath = `${BASE_PATH}${indexHtml.file}`;
+  const mainCss = indexHtml.css ? `${BASE_PATH}${indexHtml.css[0]}` : '';
 
   await fs.ensureDir('dist/blog');
 
@@ -74,8 +76,8 @@ async function run() {
     const headerHtml = `
       <header>
         <div class="header">
-          <a href="/" title="Pedro Martin Valera" class="branding">
-            <img src="/logo.svg" alt="Pedro Martin Valera" width="197" height="64">
+          <a href="${BASE_PATH}" title="Pedro Martin Valera" class="branding">
+            <img src="${BASE_PATH}logo.svg" alt="Pedro Martin Valera" width="197" height="64">
           </a>
           <button
             type="button"
@@ -90,7 +92,7 @@ async function run() {
         <nav class="navigation">
           <ul class="navigation-menu mask-links">
             <li class="${isActive('/blog')}">
-              <a href="/blog/">Blog</a>
+              <a href="${BASE_PATH}blog/">Blog</a>
             </li>
           </ul>
         </nav>
@@ -111,8 +113,8 @@ async function run() {
 
     const footerHtml = `
       <footer class="footer">
-        <a href="/" title="Pedro Martin Valera" class="branding">
-            <img src="/logo.svg" alt="Pedro Martin Valera" width="197" height="64">
+        <a href="${BASE_PATH}" title="Pedro Martin Valera" class="branding">
+            <img src="${BASE_PATH}logo.svg" alt="Pedro Martin Valera" width="197" height="64">
         </a>
         <div class="footer-sections | mask-links">
           <div>
@@ -140,6 +142,7 @@ async function run() {
       .replace('{{css}}', mainCss)
       .replace('{{js}}', mainJsPath)
       .replace('{{jsonLd}}', renderedJsonLd)
+      .replaceAll('{{basePath}}', BASE_PATH)
       .replace(
         '<my-header></my-header>',
         `<my-header>${headerHtml}</my-header>`,
@@ -216,7 +219,7 @@ async function run() {
           path="${post.slug}"
         >
           <article class="entry">
-            <a href="/blog/${post.slug}">
+            <a href="${BASE_PATH}blog/${post.slug}">
               <h2>${post.title}</h2>
             </a>
             <p>${post.excerpt}</p>
