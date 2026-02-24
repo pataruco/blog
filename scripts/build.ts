@@ -52,7 +52,6 @@ async function run() {
   const mainCss = indexHtml.css ? `/${indexHtml.css[0]}` : '';
 
   await fs.ensureDir('dist/blog');
-  await fs.ensureDir('dist/installfest');
 
   async function renderPage(
     outputPath: string,
@@ -92,9 +91,6 @@ async function run() {
           <ul class="navigation-menu mask-links">
             <li class="${isActive('/blog')}">
               <a href="/blog/">Blog</a>
-            </li>
-            <li class="${isActive('/installfest')}">
-              <a href="/installfest/">Installfest</a>
             </li>
           </ul>
         </nav>
@@ -261,30 +257,6 @@ async function run() {
       },
     },
     '/blog',
-  );
-
-  const installfestRaw = await fs.readFile(
-    'src/content/pages/installfest.md',
-    'utf-8',
-  );
-  const { data: ifData, content: ifContent } = matter(installfestRaw);
-  const ifHtml = await marked.parse(ifContent);
-  await renderPage(
-    'dist/installfest/index.html',
-    ifData.title,
-    ifData.description,
-    `<div class="content"><h1>${ifData.title}</h1><p>${ifData.description}</p>${ifHtml}</div>`,
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      about: ifData.description,
-      url: `${BASE_URL}/installfest`,
-      author: {
-        '@type': 'Person',
-        name: AUTHOR.name,
-      },
-    },
-    '/installfest',
   );
 
   const homeRaw = await fs.readFile('src/content/pages/home.md', 'utf-8');
