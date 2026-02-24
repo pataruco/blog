@@ -2,19 +2,18 @@
 
 ## What is it
 
-My personal blog migrated from Next.js to a lightweight, modern architecture using **Vanilla JS Web Components** and **Static Site Generation (SSG)** powered by **Vite**.
+My personal blog using Vanilla JS Web Components built with Static Site Generation (SSG) powered by Vite.
 
 ## Architecture
 
-- **Vanilla Web Components**: Custom elements for the header, footer, and post items.
-- **SSG Build Pipeline**: A custom TypeScript script (`scripts/build.ts`) that:
+- Vanilla Web Components: Custom elements for the header, footer, and post items.
+- SSG Build Pipeline: A custom TypeScript script (`scripts/build.ts`) that:
   - Parses Markdown content using `marked`.
-  - Highlights code blocks at build-time using `shiki` (high-contrast theme for accessibility).
+  - Highlights code blocks at build-time using `shiki`
   - Generates RSS (RSS2) and Atom feeds using `feed`.
   - Injects JSON-LD metadata for SEO.
   - Statically pre-renders component shells to ensure visibility without JavaScript.
-- **Vite**: Used for bundling assets and providing a fast development server.
-- **Biome**: Modern replacement for Rome, used for lightning-fast linting and formatting.
+
 
 ## Development
 
