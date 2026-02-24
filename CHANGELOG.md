@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/pataruco/blog/compare/blog-v1.0.0...blog-v1.1.0) (2026-02-24)
+
+
+### Features
+
+* delete installfest ([07bccbf](https://github.com/pataruco/blog/commit/07bccbfa3e20eb5e24371b0971c91d5c735b43ea))
+* delete installfest ([0010b8f](https://github.com/pataruco/blog/commit/0010b8f236b16ae3fadb0355e82380ab3270aef7))
+
+
+### Bug Fixes
+
+* release workflow ([897c81b](https://github.com/pataruco/blog/commit/897c81b12b80f9cd8b0ea5fd68eddc5cca668d28))
+* release workflow ([e5eb6b0](https://github.com/pataruco/blog/commit/e5eb6b0a5de12764f782d51e28ecece1adf7ea78))
+
 ## 1.0.0 (2026-02-24)
 
 
