@@ -8,6 +8,7 @@ import { createHighlighter } from 'shiki';
 
 const BASE_URL = 'https://www.pataruco.dev';
 // Path prefix for deployment (e.g., '/blog/' for GitHub Pages, '/' for custom domain)
+// const BASE_PATH = process.env.BASE_PATH || '/blog/';
 const BASE_PATH = process.env.BASE_PATH || '/blog/';
 const AUTHOR = {
   name: 'Pedro Martin Valera',
