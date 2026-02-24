@@ -1,8 +1,10 @@
-import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { expect, test } from '@playwright/test';
 
 test.describe('Blog verification', () => {
-  test('should have a working home page with pre-rendered content', async ({ page }) => {
+  test('should have a working home page with pre-rendered content', async ({
+    page,
+  }) => {
     await page.goto('http://localhost:4173/');
     await expect(page.locator('my-header header')).toBeVisible();
     await expect(page.locator('h1')).toContainText('I am Pedro Martin Valera');
@@ -20,7 +22,9 @@ test.describe('Blog verification', () => {
     expect(accessibilityScanResults.violations).toEqual([]);
   });
 
-  test('installfest page should have syntax highlighting and be accessible', async ({ page }) => {
+  test('installfest page should have syntax highlighting and be accessible', async ({
+    page,
+  }) => {
     await page.goto('http://localhost:4173/installfest/');
     await expect(page.locator('pre.shiki').first()).toBeVisible();
 

@@ -1,10 +1,10 @@
-import fs from 'fs-extra';
-import path from 'path';
-import { Marked } from 'marked';
-import { createHighlighter } from 'shiki';
-import matter from 'gray-matter';
 import { Feed } from 'feed';
+import fs from 'fs-extra';
 import { glob } from 'glob';
+import matter from 'gray-matter';
+import { Marked } from 'marked';
+import path from 'path';
+import { createHighlighter } from 'shiki';
 
 const BASE_URL = 'https://www.pataruco.dev';
 const AUTHOR = {
@@ -16,12 +16,24 @@ const AUTHOR = {
 async function run() {
   const highlighter = await createHighlighter({
     themes: ['github-light-high-contrast'],
-    langs: ['javascript', 'typescript', 'html', 'css', 'bash', 'json', 'tsx', 'mdx', 'md', 'toml', 'sh'],
+    langs: [
+      'javascript',
+      'typescript',
+      'html',
+      'css',
+      'bash',
+      'json',
+      'tsx',
+      'mdx',
+      'md',
+      'toml',
+      'sh',
+    ],
   });
 
   const marked = new Marked();
   const renderer = {
-    code(token: any) {
+    code(token: { text: string; lang?: string }) {
       return highlighter.codeToHtml(token.text, {
         lang: token.lang || 'text',
         theme: 'github-light-high-contrast',
@@ -36,8 +48,8 @@ async function run() {
   // Find the JS and CSS files from the manifest
   // Vite 6+ manifest structure
   const indexHtml = manifest['index.html'];
-  const mainJsPath = '/' + indexHtml.file;
-  const mainCss = indexHtml.css ? '/' + indexHtml.css[0] : '';
+  const mainJsPath = `/${indexHtml.file}`;
+  const mainCss = indexHtml.css ? `/${indexHtml.css[0]}` : '';
 
   await fs.ensureDir('dist/blog');
   await fs.ensureDir('dist/installfest');
@@ -47,15 +59,18 @@ async function run() {
     title: string,
     description: string,
     content: string,
-    jsonLd: any = null,
-    currentPath: string = '/',
+    jsonLd: unknown = null,
+    currentPath = '/',
   ) {
     let renderedJsonLd = '';
     if (jsonLd) {
-      renderedJsonLd = `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
+      renderedJsonLd = `<script type="application/ld+json">${JSON.stringify(
+        jsonLd,
+      )}</script>`;
     }
 
-    const isActive = (path: string) => currentPath.startsWith(path) ? 'is-active' : '';
+    const isActive = (path: string) =>
+      currentPath.startsWith(path) ? 'is-active' : '';
 
     const headerHtml = `
       <header>
@@ -129,15 +144,28 @@ async function run() {
       .replace('{{css}}', mainCss)
       .replace('{{js}}', mainJsPath)
       .replace('{{jsonLd}}', renderedJsonLd)
-      .replace('<my-header></my-header>', `<my-header>${headerHtml}</my-header>`)
-      .replace('<my-footer></my-footer>', `<my-footer>${footerHtml}</my-footer>`);
+      .replace(
+        '<my-header></my-header>',
+        `<my-header>${headerHtml}</my-header>`,
+      )
+      .replace(
+        '<my-footer></my-footer>',
+        `<my-footer>${footerHtml}</my-footer>`,
+      );
 
     await fs.ensureDir(path.dirname(outputPath));
     await fs.writeFile(outputPath, html);
   }
 
   const postFiles = await glob('src/content/blog/**/*.md');
-  const posts: any[] = [];
+  const posts: {
+    title: string;
+    date: Date;
+    excerpt: string;
+    slug: string;
+    path: string;
+    htmlContent: string;
+  }[] = [];
 
   for (const file of postFiles) {
     const raw = await fs.readFile(file, 'utf-8');
@@ -159,13 +187,17 @@ async function run() {
       datePublished: data.date.toISOString(),
     };
 
-    const formattedDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(data.date);
+    const formattedDate = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(data.date);
 
     await renderPage(
       path.join('dist', postPath, 'index.html'),
       data.title,
       data.excerpt || '',
-      `<div class="content"><h1>${data.title}</h1><p class="meta"><time datetime="${data.date.toISOString()}">${formattedDate}</time></p>${htmlContent}</div>`,
+      `<div class="content"><h1>${
+        data.title
+      }</h1><p class="meta"><time datetime="${data.date.toISOString()}">${formattedDate}</time></p>${htmlContent}</div>`,
       jsonLd,
       `/${postPath}`,
     );
@@ -175,9 +207,12 @@ async function run() {
 
   posts.sort((a, b) => b.date.getTime() - a.date.getTime());
 
-  const postItemsHtml = posts.map(post => {
-    const formattedDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full' }).format(post.date);
-    return `
+  const postItemsHtml = posts
+    .map((post) => {
+      const formattedDate = new Intl.DateTimeFormat('en-GB', {
+        dateStyle: 'full',
+      }).format(post.date);
+      return `
         <post-item
           title="${post.title}"
           date="${post.date.toISOString()}"
@@ -197,7 +232,8 @@ async function run() {
           </article>
         </post-item>
     `;
-  }).join('');
+    })
+    .join('');
 
   const blogIndexContent = `
     <div class="content">
@@ -217,7 +253,8 @@ async function run() {
     {
       '@context': 'https://schema.org',
       '@type': 'Blog',
-      about: 'My thoughts about building, teaching and leading product tech teams',
+      about:
+        'My thoughts about building, teaching and leading product tech teams',
       author: {
         '@type': 'Person',
         name: AUTHOR.name,
@@ -226,7 +263,10 @@ async function run() {
     '/blog',
   );
 
-  const installfestRaw = await fs.readFile('src/content/pages/installfest.md', 'utf-8');
+  const installfestRaw = await fs.readFile(
+    'src/content/pages/installfest.md',
+    'utf-8',
+  );
   const { data: ifData, content: ifContent } = matter(installfestRaw);
   const ifHtml = await marked.parse(ifContent);
   await renderPage(
@@ -250,21 +290,28 @@ async function run() {
   const homeRaw = await fs.readFile('src/content/pages/home.md', 'utf-8');
   const { data: homeData, content: homeContent } = matter(homeRaw);
   const homeHtml = await marked.parse(homeContent);
-  await renderPage('dist/index.html', homeData.title, homeData.description, `<div class="content">${homeHtml}</div>`, {
-    '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    about: AUTHOR.name,
-    description: homeData.description,
-    url: BASE_URL,
-    author: {
-      '@type': 'Person',
-      name: AUTHOR.name,
+  await renderPage(
+    'dist/index.html',
+    homeData.title,
+    homeData.description,
+    `<div class="content">${homeHtml}</div>`,
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      about: AUTHOR.name,
+      description: homeData.description,
+      url: BASE_URL,
+      author: {
+        '@type': 'Person',
+        name: AUTHOR.name,
+      },
     },
-  });
+  );
 
   const feed = new Feed({
     title: 'Pedro Martin Valera',
-    description: 'My thoughts about building, teaching and leading product tech teams',
+    description:
+      'My thoughts about building, teaching and leading product tech teams',
     id: BASE_URL,
     link: BASE_URL,
     language: 'en',
@@ -286,8 +333,14 @@ async function run() {
   await fs.writeFile('dist/rss.xml', feed.rss2());
   await fs.writeFile('dist/atom.xml', feed.atom1());
 
-  const sitemapItems = posts.map(post => `
-  <url><loc>${BASE_URL}/${post.path}</loc><lastmod>${post.date.toISOString()}</lastmod></url>`).join('');
+  const sitemapItems = posts
+    .map(
+      (post) => `
+  <url><loc>${BASE_URL}/${
+        post.path
+      }</loc><lastmod>${post.date.toISOString()}</lastmod></url>`,
+    )
+    .join('');
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

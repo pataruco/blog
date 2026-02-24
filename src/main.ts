@@ -1,6 +1,6 @@
-import './styles/index.css';
-import './components/header';
 import './components/footer';
+import './components/header';
 import './components/post-item';
+import './styles/index.css';
 
 console.log('Blog initialized');

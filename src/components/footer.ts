@@ -36,16 +36,19 @@ class MyFooter extends HTMLElement {
     const now = new Date();
     const timestampEl = this.querySelector('#timestamp');
     if (timestampEl) {
-      timestampEl.innerHTML = `Updated on: <time datetime="${now.toISOString()}">${new Intl.DateTimeFormat('en-GB', {
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        month: 'long',
-        timeZone: 'Europe/London',
-        timeZoneName: 'short',
-        year: 'numeric',
-        hour12: true,
-      }).format(now)}</time>`;
+      timestampEl.innerHTML = `Updated on: <time datetime="${now.toISOString()}">${new Intl.DateTimeFormat(
+        'en-GB',
+        {
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          month: 'long',
+          timeZone: 'Europe/London',
+          timeZoneName: 'short',
+          year: 'numeric',
+          hour12: true,
+        },
+      ).format(now)}</time>`;
     }
   }
 }
