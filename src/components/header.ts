@@ -37,9 +37,6 @@ class MyHeader extends HTMLElement {
             <li class="${path.startsWith('/blog') ? 'is-active' : ''}">
               <a href="/blog/">Blog</a>
             </li>
-            <li class="${path.startsWith('/installfest') ? 'is-active' : ''}">
-              <a href="/installfest/">Installfest</a>
-            </li>
           </ul>
         </nav>
       </header>

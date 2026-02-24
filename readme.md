@@ -60,20 +60,6 @@ pnpm lint
 pnpm format
 ```
 
-## Testing
-
-Run unit tests (Vitest):
-
-```sh
-pnpm test
-```
-
-Run verification and accessibility tests (Playwright):
-
-```sh
-npx playwright test
-```
-
 ## Deployment
 
 The site is fully static and can be deployed to any static hosting provider (Vercel, GitHub Pages, Netlify, etc.) by serving the contents of the `dist/` directory.
