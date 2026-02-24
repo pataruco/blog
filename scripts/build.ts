@@ -201,7 +201,14 @@ async function run() {
       `/${postPath}`,
     );
 
-    posts.push({ ...data, slug, path: postPath, htmlContent });
+    posts.push({
+      title: data.title as string,
+      date: data.date as Date,
+      excerpt: data.excerpt as string,
+      slug,
+      path: postPath,
+      htmlContent,
+    });
   }
 
   posts.sort((a, b) => b.date.getTime() - a.date.getTime());

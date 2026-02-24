@@ -19,8 +19,11 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  BASE_PATH: '/'
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
