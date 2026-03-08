@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/pataruco/blog/compare/blog-v1.1.2...blog-v1.2.0) (2026-03-08)
+
+
+### Features
+
+* el guacal ([6f38791](https://github.com/pataruco/blog/commit/6f38791a777e487858344f92ce28fc3cca0ac852))
+* el guacal blog post ([8a7add9](https://github.com/pataruco/blog/commit/8a7add9bd2b46c152450ac018dadd9b87aff387f))
+
 ## [1.1.2](https://github.com/pataruco/blog/compare/blog-v1.1.1...blog-v1.1.2) (2026-02-24)
 
 
