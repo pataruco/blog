@@ -24,4 +24,4 @@ Upon graduation, they were crazy enough to invite me to join the [faculty](https
 - ~~Senior Software Engineer Consultant at [Red Badger](https://red-badger.com/)~~
 - ~~Teacher assistant at [General Assembly](https://ga.co)~~
 - Distinguished Faculty Member (fancy name for a tech teacher) at [General Assembly](https://ga.co)
-- Tech lead consultant at [101 Ways](https://www.101ways.com/)
+- ~~Tech lead consultant at [101 Ways](https://www.101ways.com/)~~
