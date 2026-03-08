@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.1](https://github.com/pataruco/blog/compare/blog-v1.2.0...blog-v1.2.1) (2026-03-08)
+
+
+### Bug Fixes
+
+* headings ([b2dbbfb](https://github.com/pataruco/blog/commit/b2dbbfbe3d7040fd017eb574621ea35f95e3911b))
+* headinsg in el guacal blog post ([9c2a6b2](https://github.com/pataruco/blog/commit/9c2a6b271fb76535ca31434f945575f7ed7b91cd))
+
 ## [1.2.0](https://github.com/pataruco/blog/compare/blog-v1.1.2...blog-v1.2.0) (2026-03-08)
 
 
