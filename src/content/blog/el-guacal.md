@@ -13,7 +13,7 @@ El Guacal started from a simple, personal question: *where can I find Harina P.A
 
 In Venezuela, a guacal is a wooden crate used to transport fruit, vegetables, and goods. It is a humble object, deeply embedded in the country’s commercial culture. Markets, street vendors, and family kitchens all revolve around it. Naming this project “El Guacal” felt right: it is a vessel for carrying something familiar across borders.
 
-## The personal motive
+### The personal motive
 
 Migration is not just a change of address. It is learning to navigate a new supermarket where nothing looks like what you grew up with. It is explaining to a colleague what cachapa is. It is the specific sadness of craving tequeños at midnight, knowing that nowhere nearby sells them.
 
@@ -21,9 +21,9 @@ I built El Guacal because I have lived this. The Venezuelan displacement crisis,
 
 This is not a problem that one person can solve. The Venezuelan commercial footprint is vast and constantly shifting: new abastos open, restaurants close, Tesco starts stocking Harina P.A.N. in Lewisham but not in Hackney. The only way to keep track is to ask the community. That is the heart of El Guacal: crowdsourced knowledge from the people who need it most.
 
-# How it works
+## How it works
 
-El Guacal is an open-source (GitHub repository)[https://github.com/pataruco/el-guacal], crowdsourced database of Venezuelan product locations worldwide. Anyone can browse the map without an account. If you want to add a store, edit a listing, or report a closure, you sign in and contribute. The data belongs to everyone: it is exported daily as open datasets (JSON and CSV) published automatically as GitHub [releases](https://github.com/pataruco/el-guacal/releases).
+El Guacal is an open-source ([GitHub repository](https://github.com/pataruco/el-guacal)), crowdsourced database of Venezuelan product locations worldwide. Anyone can browse the map without an account. If you want to add a store, edit a listing, or report a closure, you sign in and contribute. The data belongs to everyone: it is exported daily as open datasets (JSON and CSV) published automatically as GitHub [releases](https://github.com/pataruco/el-guacal/releases).
 
 The initial dataset started with over 60 stores across the UK, from Brixton Market in south London to Lupe Pintos in Edinburgh, from Spanglish Tiendita in Newcastle to Worldwide Foods in Manchester. Every single one was seeded with Harina P.A.N. by Alimentos Polar, because if you know, you know.
 
@@ -31,31 +31,31 @@ The initial dataset started with over 60 stores across the UK, from Brixton Mark
 
 Building El Guacal meant making deliberate decisions about every layer of the stack. I [documented](https://github.com/pataruco/el-guacal/tree/main/docs/adrs) these through Architecture Decision Records (ADRs) to keep the reasoning transparent.
 
-## Rust for the backend
+### Rust for the backend
 
-The API server is written in Rust using the [axum`](https://github.com/tokio-rs/axum) framework. This was not an obvious choice for a side project. Rust has a steep learning curve, and most people would reach for Node.js or Python. But I wanted something fast, reliable, and memory-efficient for a service running on Google Cloud Run, where you pay for what you use. Rust’s compile-time guarantees also mean fewer runtime surprises, which matters when you are a solo maintainer.
+The API server is written in Rust using the [`axum`](https://github.com/tokio-rs/axum) framework. This was not an obvious choice for a side project. Rust has a steep learning curve, and most people would reach for Node.js or Python. But I wanted something fast, reliable, and memory-efficient for a service running on Google Cloud Run, where you pay for what you use. Rust’s compile-time guarantees also mean fewer runtime surprises, which matters when you are a solo maintainer.
 
 The API uses GraphQL (via [`async-graphql`](https://async-graphql.github.io/async-graphql/en/index.html)) because the frontend needs flexible queries: fetch stores near a location, filter by products, and get details for a single store. GraphQL lets the client ask for exactly what it needs.
 
-## PostgreSQL with PostGIS
+### PostgreSQL with PostGIS
 
-Geographic queries are the core of this application. “Show me stores within 5km” is not a query you can efficiently answer with a regular database. [PostGIS](https://postgis.net/), the spatial extension for PostgreSQL, handles this natively. Store locations are stored as ``GEOGRAPHY(Point)` types with a GIST index, enabling fast radius-based lookups even as the dataset grows.
+Geographic queries are the core of this application. “Show me stores within 5km” is not a query you can efficiently answer with a regular database. [PostGIS](https://postgis.net/), the spatial extension for PostgreSQL, handles this natively. Store locations are stored as `GEOGRAPHY(Point)` types with a GIST index, enabling fast radius-based lookups even as the dataset grows.
 
-## React with Vite and React Router
+### React with Vite and React Router
 
 The frontend is a React application using Vite for bundling and React Router v7 for static site generation. State management uses Redux Toolkit with RTK Query, which generates typed GraphQL hooks from the schema. The map uses Google Maps via [`@vis.gl/react-google-maps`](https://visgl.github.io/react-google-maps/).
 
-## Firebase for auth
+### Firebase for auth
 
 Authentication uses Firebase, supporting both Google sign-in and email/password. The interesting part is how the server verifies tokens: rather than calling Firebase on every request, it fetches Google’s public keys once, caches them for an hour, and validates JWTs locally using RS256. This keeps the backend stateless and fast.
 
 For more details on the authentication flow, see [authentication flow](https://github.com/pataruco/el-guacal/blob/main/docs/auth-flow.md).
 
-## Infrastructure as Code
+### Infrastructure as Code
 
 Everything runs on Google Cloud Platform and is defined in Terraform: Cloud SQL for the database, Cloud Run for the API, Artefact Registry for Docker images, and Firebase Hosting for the static frontend. GitHub Actions handles CI/CD, with Workload Identity Federation for secure, secretless deployments.
 
-## Monorepo with Moon
+### Monorepo with Moon
 
 The project is a monorepo managed with [Moon](https://moonrepo.dev/moon), a task runner designed for polyglot repositories. It orchestrates builds across the Rust backend and the TypeScript frontend, managing dependency graphs for tasks such as code generation, testing, and deployment.
 
