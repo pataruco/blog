@@ -409,7 +409,7 @@ kbd {
   --magenta: rgba(255, 0, 255, 100%);
   --yellow: rgba(255, 255, 0, 100%);
   --cyan: rgba(0, 255, 255, 100%);
-  --code-background: #ffffff;
+  --code-background: #818b981f;
 }
 
 *,
@@ -675,6 +675,11 @@ main > :last-child[data-block-flush] {
 code {
   background-color: var(--code-background);
   padding: 0.5em;
+  white-space: break-spaces;
+  border-radius: 6px;
+  margin: 0;
+  padding: 0.2em 0.4em;
+  font-size: 85%;
 }
 
 .navigation {
