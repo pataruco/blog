@@ -1393,13 +1393,22 @@ h1 ~ p:first-of-type {
   margin-bottom: unset;
 }
 
-/* Accessibility Fixes */
+/* Code blocks - GitHub light style */
 .shiki {
-  background-color: #ffffff;
-  padding: 1rem;
+  background-color: #f6f8fa;
+  padding: 16px;
   border-radius: 6px;
   overflow-x: auto;
+  border: 1px solid #d1d9e0;
+  font-size: 85%;
+  line-height: 1.45;
 }
 pre.shiki {
-  margin: 1.5rem 0;
+  margin: 1em 0;
+}
+pre.shiki code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
 }

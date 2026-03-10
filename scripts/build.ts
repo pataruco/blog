@@ -18,7 +18,7 @@ const AUTHOR = {
 
 async function run() {
   const highlighter = await createHighlighter({
-    themes: ['github-light-high-contrast'],
+    themes: ['github-light'],
     langs: [
       'javascript',
       'typescript',
@@ -31,16 +31,28 @@ async function run() {
       'md',
       'toml',
       'sh',
+      'rust',
+      'scheme',
     ],
   });
 
   const marked = new Marked();
   const renderer = {
     code(token: { text: string; lang?: string }) {
-      return highlighter.codeToHtml(token.text, {
-        lang: token.lang || 'text',
-        theme: 'github-light-high-contrast',
-      });
+      if (token.lang === 'mermaid') {
+        return `<pre class="mermaid">${token.text}</pre>`;
+      }
+      try {
+        return highlighter.codeToHtml(token.text, {
+          lang: token.lang || 'text',
+          theme: 'github-light',
+        });
+      } catch {
+        return highlighter.codeToHtml(token.text, {
+          lang: 'text',
+          theme: 'github-light',
+        });
+      }
     },
   };
   marked.use({ renderer });
