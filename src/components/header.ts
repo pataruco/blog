@@ -1,10 +1,6 @@
 class MyHeader extends HTMLElement {
   connectedCallback() {
-    if (!this.innerHTML.trim()) {
-      this.render();
-    } else {
-      this.attachEvents();
-    }
+    this.render();
   }
 
   attachEvents() {
