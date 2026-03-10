@@ -1,7 +1,7 @@
 ---
 title: "WASM: beyond the browser and back again"
 date: 2026-03-09T00:00:00.000Z
-excerpt: "WebAssembly is a spectrum from a heavy decision engine in a browser extension to a thin bootstrap layer in a code editor plugin. Two projects, two patterns, one compilation target."
+excerpt: "From running a Rust decision engine inside a Firefox extension to bootstrapping a language server in Zed — what building two WASM-powered projects taught me about the spectrum of WebAssembly patterns."
 slug: wasm-beyond-the-browser-and-back-again
 ---
 
