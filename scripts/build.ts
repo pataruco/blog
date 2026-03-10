@@ -89,7 +89,11 @@ async function run() {
       .replace('{{css}}', mainCss)
       .replace('{{js}}', mainJsPath)
       .replace('{{jsonLd}}', renderedJsonLd)
-      .replaceAll('{{basePath}}', BASE_PATH);
+      .replaceAll('{{basePath}}', BASE_PATH)
+      .replace(
+        '<my-footer></my-footer>',
+        `<my-footer build-time="${Date.now()}"></my-footer>`,
+      );
 
     await fs.ensureDir(path.dirname(outputPath));
     await fs.writeFile(outputPath, html);
