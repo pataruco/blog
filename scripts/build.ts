@@ -74,7 +74,6 @@ async function run() {
     description: string,
     content: string,
     jsonLd: unknown = null,
-    currentPath = '/',
   ) {
     let renderedJsonLd = '';
     if (jsonLd) {
@@ -83,71 +82,6 @@ async function run() {
       )}</script>`;
     }
 
-    const isActive = (path: string) =>
-      currentPath.startsWith(path) ? 'is-active' : '';
-
-    const headerHtml = `
-      <header>
-        <div class="header">
-          <a href="${BASE_PATH}" title="Pedro Martin Valera" class="branding">
-            <img src="${BASE_PATH}logo.svg" alt="Pedro Martin Valera" width="197" height="64">
-          </a>
-          <button
-            type="button"
-            aria-label="Toggle navigation"
-            class="navigation-toggle"
-          >
-            <svg id="navigation-toggle" viewBox="0 0 21 16" width="21" height="16">
-                <path d="M20.77 7v2h-20V7zm0 7v2h-20v-2zM.77 2V0h20v2z" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
-        <nav class="navigation">
-          <ul class="navigation-menu mask-links">
-            <li class="${isActive('/blog')}">
-              <a href="${BASE_PATH}blog/">Blog</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    `;
-
-    const now = new Date();
-    const formattedNow = new Intl.DateTimeFormat('en-GB', {
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      month: 'long',
-      timeZone: 'Europe/London',
-      timeZoneName: 'short',
-      year: 'numeric',
-      hour12: true,
-    }).format(now);
-
-    const footerHtml = `
-      <footer class="footer">
-        <a href="${BASE_PATH}" title="Pedro Martin Valera" class="branding">
-            <img src="${BASE_PATH}logo.svg" alt="Pedro Martin Valera" width="197" height="64">
-        </a>
-        <div class="footer-sections | mask-links">
-          <div>
-            <h3 class="size-md font-bold">Follow me</h3>
-            <p>
-              <a href="https://www.linkedin.com/in/pataruco/">LinkedIn</a> <br />
-              <a href="https://github.com/pataruco">GitHub</a>
-            </p>
-          </div>
-          <div>
-            <h3 class="size-md font-bold">Contact me</h3>
-            <p>
-              <a href="mailto:hola@pataruco.dev">hola@pataruco.dev</a>
-            </p>
-          </div>
-        </div>
-        <p class="timestamp" id="timestamp">Updated on: <time datetime="${now.toISOString()}">${formattedNow}</time></p>
-      </footer>
-    `;
-
     const html = template
       .replace('{{title}}', title)
       .replace('{{description}}', description)
@@ -155,15 +89,7 @@ async function run() {
       .replace('{{css}}', mainCss)
       .replace('{{js}}', mainJsPath)
       .replace('{{jsonLd}}', renderedJsonLd)
-      .replaceAll('{{basePath}}', BASE_PATH)
-      .replace(
-        '<my-header></my-header>',
-        `<my-header>${headerHtml}</my-header>`,
-      )
-      .replace(
-        '<my-footer></my-footer>',
-        `<my-footer>${footerHtml}</my-footer>`,
-      );
+      .replaceAll('{{basePath}}', BASE_PATH);
 
     await fs.ensureDir(path.dirname(outputPath));
     await fs.writeFile(outputPath, html);
@@ -211,7 +137,6 @@ async function run() {
         data.title
       }</h1><p class="meta"><time datetime="${data.date.toISOString()}">${formattedDate}</time></p>${htmlContent}</div>`,
       jsonLd,
-      `/${postPath}`,
     );
 
     posts.push({
@@ -279,7 +204,6 @@ async function run() {
         name: AUTHOR.name,
       },
     },
-    '/blog',
   );
 
   const homeRaw = await fs.readFile('src/content/pages/home.md', 'utf-8');

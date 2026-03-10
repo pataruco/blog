@@ -1,8 +1,6 @@
 class MyFooter extends HTMLElement {
   connectedCallback() {
-    if (!this.innerHTML.trim()) {
-      this.render();
-    }
+    this.render();
   }
 
   render() {
@@ -16,7 +14,9 @@ class MyFooter extends HTMLElement {
             <h3 class="size-md font-bold">Follow me</h3>
             <p>
               <a href="https://www.linkedin.com/in/pataruco/">LinkedIn</a> <br />
-              <a href="https://github.com/pataruco">GitHub</a>
+              <a href="https://github.com/pataruco">GitHub</a> <br />
+              <a href="https://bsky.app/profile/pataruco.dev">Bluesky</a> <br />
+              <a href="https://pataruco.dev/rss.xml">RSS</a>
             </p>
           </div>
           <div>
