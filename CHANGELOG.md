@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/pataruco/blog/compare/blog-v1.4.0...blog-v1.4.1) (2026-03-10)
+
+
+### Bug Fixes
+
+* build timestamp ([c40c725](https://github.com/pataruco/blog/commit/c40c7256cc56743e72d02696fcd2733c1b5098f1))
+* build timestamp ([816f0e0](https://github.com/pataruco/blog/commit/816f0e0a821eec9b8f00f018d041c2df13705125))
+
 ## [1.4.0](https://github.com/pataruco/blog/compare/blog-v1.3.0...blog-v1.4.0) (2026-03-10)
 
 
