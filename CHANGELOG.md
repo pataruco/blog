@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/pataruco/blog/compare/blog-v1.2.1...blog-v1.3.0) (2026-03-10)
+
+
+### Features
+
+* add wasm ([023bace](https://github.com/pataruco/blog/commit/023baceff8b3b16ef6c2d025863532d41ef9cd6a))
+
 ## [1.2.1](https://github.com/pataruco/blog/compare/blog-v1.2.0...blog-v1.2.1) (2026-03-08)
 
 
