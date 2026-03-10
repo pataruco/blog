@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/pataruco/blog/compare/blog-v1.3.0...blog-v1.4.0) (2026-03-10)
+
+
+### Features
+
+* add RSS ([753ff6f](https://github.com/pataruco/blog/commit/753ff6fe9a95a0f240e44ca60249a6e9df113ac2))
+* add RSS ([dcbcb9a](https://github.com/pataruco/blog/commit/dcbcb9a7ee05902ce83a12100e1b4a19198d6617))
+
 ## [1.3.0](https://github.com/pataruco/blog/compare/blog-v1.2.1...blog-v1.3.0) (2026-03-10)
 
 
