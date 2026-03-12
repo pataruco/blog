@@ -226,7 +226,7 @@ sequenceDiagram
     Note over JSON: Simple, debuggable,<br/>but types must stay in sync
 ```
 
-## Zed MJML: a code editor extension I built, powered by WASM
+## Zed MJML[*](#oss): a code editor extension I built, powered by WASM
 
 ### What is MJML?
 
@@ -450,4 +450,20 @@ If you have not tried WASM yet, I would encourage you to start small. Pick a pie
 
 ---
 
-_It is an open source project: [zed-mjml](https://github.com/pataruco/zed-mjml)._
+<ul>
+  <li>
+    <p id="oss">
+      *
+      <small>
+        It is an open source project:   <a href="https://github.com/pataruco/zed-mjml">zed-mjml</a>.
+      </small>
+    </p>
+  </li>
+  <li>
+    <p id="oss">
+      <small>
+        This article was originally posted at   <a href="https://awesome.red-badger.com/pataruco/wasm-beyond-the-browser-and-back-again">Red Badger's developer blog</a>.
+      </small>
+    </p>
+  </li>
+</ul>
