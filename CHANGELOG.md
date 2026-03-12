@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.2](https://github.com/pataruco/blog/compare/blog-v1.4.1...blog-v1.4.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* set originla published ([7d25c88](https://github.com/pataruco/blog/commit/7d25c88466d69b0c1b0396dad9648aee0f35d3db))
+* set originla published ([bce59c2](https://github.com/pataruco/blog/commit/bce59c25ceba1e4795b70e7c6b6b23709dae0d74))
+
 ## [1.4.1](https://github.com/pataruco/blog/compare/blog-v1.4.0...blog-v1.4.1) (2026-03-10)
 
 
