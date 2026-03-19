@@ -16,7 +16,7 @@ class MyFooter extends HTMLElement {
               <a href="https://www.linkedin.com/in/pataruco/">LinkedIn</a> <br />
               <a href="https://github.com/pataruco">GitHub</a> <br />
               <a href="https://bsky.app/profile/pataruco.dev">Bluesky</a> <br />
-              <a href="https://pataruco.dev/rss.xml">RSS</a>
+              <a href="https://pataruco.dev/atom.xml">Atom</a>
             </p>
           </div>
           <div>
