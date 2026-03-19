@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.0](https://github.com/pataruco/blog/compare/blog-v1.5.0...blog-v1.6.0) (2026-03-19)
+
+
+### Features
+
+* change mobile menu button ([c323ee2](https://github.com/pataruco/blog/commit/c323ee213b6935358f65dcf26078a94de9f898d6))
+* good flag bad flag ([81a86ef](https://github.com/pataruco/blog/commit/81a86ef37cf84840ec084c781c6666c94ebc4fe0))
+* good flag great flag ([015d335](https://github.com/pataruco/blog/commit/015d335027bd1f5aee67fa0d3c911859fca4b019))
+
 ## [1.5.0](https://github.com/pataruco/blog/compare/blog-v1.4.2...blog-v1.5.0) (2026-03-19)
 
 
