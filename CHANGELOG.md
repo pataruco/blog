@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/pataruco/blog/compare/blog-v1.4.2...blog-v1.5.0) (2026-03-19)
+
+
+### Features
+
+* web day out blog post ([3a613df](https://github.com/pataruco/blog/commit/3a613df652b4c635a9b22ac85fab1537020a5343))
+
 ## [1.4.2](https://github.com/pataruco/blog/compare/blog-v1.4.1...blog-v1.4.2) (2026-03-12)
 
 
