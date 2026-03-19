@@ -10,7 +10,8 @@
 
 html {
   line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
+  text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Sections
@@ -22,6 +23,12 @@ html {
 
 body {
   margin: 0;
+  line-height: 1.5;
+  text-decoration-skip-ink: auto;
+  font-optical-sizing: auto;
+  font-variant-ligatures: common-ligatures no-discretionary-ligatures
+    no-historical-ligatures contextual;
+  font-kerning: normal;
 }
 
 /**
@@ -94,9 +101,11 @@ abbr[title] {
  * Add the correct font weight in Chrome, Edge, and Safari.
  */
 
+strong,
 b,
-strong {
-  font-weight: bolder;
+th {
+  font-weight: bold;
+  font-size-adjust: 0.514; /* Check for the different weights you may be using */
 }
 
 /**
@@ -134,10 +143,18 @@ sup {
 
 sub {
   bottom: -0.25em;
+  vertical-align: baseline;
+  font-size: 100%;
+  line-height: inherit;
+  font-variant-position: sub;
 }
 
 sup {
   top: -0.5em;
+  vertical-align: baseline;
+  font-size: 100%;
+  line-height: inherit;
+  font-variant-position: super;
 }
 
 /* Embedded content
@@ -557,12 +574,16 @@ h6 {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 0.3em;
+  font-size-adjust: 0.514;
+  font-variant-numeric: lining-nums;
 }
 h1 {
   font-size: clamp(2.5rem, 0.925rem + 5.25vw, 5.125rem);
   font-size: var(--size-xxl);
   letter-spacing: -0.02em;
   margin-bottom: 0.6em;
+  font-size-adjust: 0.521; /* check if this changes with an optical sizing axis */
+  font-variant-ligatures: discretionary-ligatures;
 }
 h1 + .meta {
   margin-bottom: calc(clamp(2.5rem, 0.925rem + 5.25vw, 5.125rem) * 0.6);
@@ -1413,4 +1434,34 @@ pre.shiki code {
   padding: 0;
   border-radius: 0;
   font-size: inherit;
+}
+
+td,
+math,
+time[datetime*=":"] {
+  font-variant-numeric: tabular-nums lining-nums slashed-zero;
+}
+
+pre,
+code,
+var,
+samp,
+kbd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}
+
+pre {
+  white-space: pre-wrap;
+  text-wrap: auto;
+}
+
+code {
+  font-variant-numeric: slashed-zero;
 }

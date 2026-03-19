@@ -23,9 +23,7 @@ class MyHeader extends HTMLElement {
             aria-label="Toggle navigation"
             class="navigation-toggle"
           >
-            <svg id="navigation-toggle" viewBox="0 0 21 16" width="21" height="16">
-                <path d="M20.77 7v2h-20V7zm0 7v2h-20v-2zM.77 2V0h20v2z" fill="currentColor" />
-            </svg>
+            menu
           </button>
         </div>
         <nav class="navigation">
