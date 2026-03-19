@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/pataruco/blog/compare/blog-v1.6.0...blog-v1.6.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* change rss to atom ([e7495bc](https://github.com/pataruco/blog/commit/e7495bc18d0924334cb38f7ce0b91fb8ec447bf9))
+
 ## [1.6.0](https://github.com/pataruco/blog/compare/blog-v1.5.0...blog-v1.6.0) (2026-03-19)
 
 
