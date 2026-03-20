@@ -86,8 +86,8 @@ async function run() {
       .replace('{{title}}', title)
       .replace('{{description}}', description)
       .replace('{{content}}', content)
-      .replace('{{css}}', mainCss)
-      .replace('{{js}}', mainJsPath)
+      .replaceAll('{{css}}', mainCss)
+      .replaceAll('{{js}}', mainJsPath)
       .replace('{{jsonLd}}', renderedJsonLd)
       .replaceAll('{{basePath}}', BASE_PATH)
       .replace(
