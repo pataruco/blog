@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.0](https://github.com/pataruco/blog/compare/blog-v1.6.1...blog-v1.7.0) (2026-03-20)
+
+
+### Features
+
+* add mermaid support ([680d670](https://github.com/pataruco/blog/commit/680d670367942b1d018de374465d125e07458ca4))
+* cdn preconnect ([1754350](https://github.com/pataruco/blog/commit/1754350d10592f97e21fd7b84b31e1aebc9a6d8f))
+* favicon ([77a2ab2](https://github.com/pataruco/blog/commit/77a2ab2cce12fa46e65ae067a4e92bb5f01d6c11))
+* remove Inter font family ([1a681d8](https://github.com/pataruco/blog/commit/1a681d851aa68c5cf2e8ded4a09d9c0bb26813b2))
+* set preconnect for jsdelivr CDN ([e214b0e](https://github.com/pataruco/blog/commit/e214b0ed73712455dd6c5bd65d39ad8937a17022))
+* set preconnect to mermaid ([d746038](https://github.com/pataruco/blog/commit/d746038963f4d9c307ddac8c5e6f634ef68fc4f4))
+
 ## [1.6.1](https://github.com/pataruco/blog/compare/blog-v1.6.0...blog-v1.6.1) (2026-03-19)
 
 
