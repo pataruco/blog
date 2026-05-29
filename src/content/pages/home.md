@@ -1,9 +1,9 @@
 ---
-title: "I am Pedro Martin Valera"
-description: "I am a web developer and educator. I help to build, teach and lead product tech teams."
+title: 'I am Pedro Martin Valera'
+description: 'I am a web developer and educator. I help to build, teach and lead product tech teams.'
 ---
 
-# I am Pedro Martin Valera
+# I am Pedro Martín Valera
 
 Web developer and educator based in London. I help to build, teach and lead product tech teams.
 
