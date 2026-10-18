@@ -27,7 +27,7 @@ What was incredible to hear is that coming soon: a JSON config read by the compi
 
 And the feature I keep thinking about is "comptime-only" functions—things that have no runtime result, like allocating memory at compile time and turning the result into a fixed value, or loading an entire asset folder into the binary.
 
-## Benedikt Wiethof & Theophil Spiegeler Castañeda: The future of unmanned systems is built on Rust
+### Benedikt Wiethof & Theophil Spiegeler Castañeda: The future of unmanned systems is built on Rust
 
 A sponsored talk from [Quantum Systems](https://quantum-systems.com/).
 
@@ -41,15 +41,19 @@ Now, strip away the drones and this is the shape of [Crux](https://redbadger.git
 
 Some patterns are resilient enough to run at military grade.
 
-## Jana Dönszelmann — Optimizing rustc's next trait solver
+### Jana Dönszelmann: Optimizing rustc's next trait solver
 
-[Jana](https://donsz.nl) works full time on the performance of rustc's new trait solver, and this was the clearest explanation of what a trait solver _is_ that I've heard. It's a proof engine. `u64: Clone`? Prove it. The analogy is [Prolog](https://en.wikipedia.org/wiki/Prolog): facts, rules and a search — at which point lcnr, in the audience, shook their head, and Jana admitted: "I will lie a little bit today."
+[Jana](https://donsz.nl) works full-time on improving the speed of rustc's new trait solver, and this was the clearest explanation of what a trait solver _is_ that I've heard. It's a system that checks proofs.
 
-The scale is the surprise. Compiling the standard library proves `Sized` about 800,000 times. And because an `impl` with an associated type is really a function from types to types, the solver is Turing complete — [`typenum`](https://crates.io/crates/typenum) does arithmetic in it, someone wrote chess in it — so a single query can take arbitrarily long. Micro-optimisations buy 5–10%. Algorithmic fixes "literally make 100% difference".
+The analogy is [Prolog](https://en.wikipedia.org/wiki/Prolog):
 
-The lever is caching, and the clever bit is canonicalisation: generalise a goal so that two queries that differ only in what their type parameters are called hit the same cache entry. The hit rate is now around 80%. One fix for opaque types halved the compile time of a parser benchmark; over the year, that benchmark went from 200 billion CPU cycles to about seven billion.
+> Prolog is intended primarily as a declarative programming language: the program is a set of facts and rules, which define relations. A computation is initiated by running a query over the program.
 
-The outlier graph said it all: a thousand crates, once up to 16× slower than the old solver, now mostly sitting at 1.0×. Stabilisation is in its final comment period, aimed at Rust 1.101.
+The size is surprising. Compiling the standard library checks `Sized` about 800,000 times. And because an `impl` with an associated type works like a function from types to types, the solver can do any computation. On this [`typenum`](https://crates.io/crates/typenum) does math with it, and a single query can take a very long time, so small improvements reduce the compile time.
+
+Now, the key is caching, and the smart part is canonicalisation: making a goal more general so two queries that differ only in the names of their type parameters use the same cache entry. The success rate is now about 80%. One fix for hidden types cut a parser test's compile time in half; over the year, that test went from 200 billion CPU cycles to about seven billion.
+
+All these improvements are aimed at Rust 1.101
 
 ## Arya Dradjica — Building a query system
 
