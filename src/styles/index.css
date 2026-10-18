@@ -662,6 +662,7 @@ h1 ~ p:first-of-type:not(blockquote + p) {
 blockquote {
   --content-wrap: 27ch;
   margin: 1.5em 0;
+  font-size: var(--size-md);
 }
 blockquote:before {
   content: "“";

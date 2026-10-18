@@ -19,7 +19,7 @@ class PostItem extends HTMLElement {
 
     this.innerHTML = `
       <article class="entry">
-        <a href="/blog/${path}">
+        <a href="/blog/${path}/">
           <h2>${title}</h2>
         </a>
         <p>${excerpt || ''}</p>
