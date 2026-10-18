@@ -49,35 +49,25 @@ The analogy is [Prolog](https://en.wikipedia.org/wiki/Prolog):
 
 > Prolog is intended primarily as a declarative programming language: the program is a set of facts and rules, which define relations. A computation is initiated by running a query over the program.
 
+<small>From Wikipedia</small>
+
 The size is surprising. Compiling the standard library checks `Sized` about 800,000 times. And because an `impl` with an associated type works like a function from types to types, the solver can do any computation. On this [`typenum`](https://crates.io/crates/typenum) does math with it, and a single query can take a very long time, so small improvements reduce the compile time.
 
-Now, the key is caching, and the smart part is canonicalisation: making a goal more general so two queries that differ only in the names of their type parameters use the same cache entry. The success rate is now about 80%. One fix for hidden types cut a parser test's compile time in half; over the year, that test went from 200 billion CPU cycles to about seven billion.
+Now, the key is caching, and the smart part is canonicalisation: making a goal more general so two queries that differ only in the names of their type parameters use the same cache entry. The success rate is now about 80%. One fix for hidden types cut a parser test's compile time in half; and over the year, that test went from 200 billion CPU cycles to about seven billion.
 
-All these improvements are aimed at Rust 1.101
+All these improvements are aimed at Rust [1.101](https://releases.rs/docs/1.101.0/)
 
-## Arya Dradjica — Building a query system
+### Timo Bachmann: Rebuilding the Tower of Babel: write your own language server with Tree-sitter
 
-[Arya](https://bal-e.org/) has spent a year and a half writing a Rust compiler, mostly on her own. "Mistake, maybe. Sure." It's called Crabby, and the argument for its existence is that rustc's high-level architecture is now its biggest bottleneck — but rustc is too big, too busy and too stability-bound to try radical changes in. So Crabby is the playground.
+[Timo](https://github.com/tfachmann), who is a robotics researcher at the German Aerospace Center, has to deal with a problem that is wonderfully specific. A colleague developed a process manager by creating his own language and currently the configuration language is being used by thirteen robots and around 200 users, on his words "That's quite a number, but still not enough to allow for tooling.", so all the editors display it in black and white.
 
-The talk was about its query system, Capillary, and started with a trick question: who here has used a query system? Anyone who didn't raise a hand was wrong, because a Makefile is a dependency graph, and "query systems are [Make](https://en.wikipedia.org/wiki/Make_%28software%29)". The difference in a compiler is that the dependencies are discovered as you go, and the unit of work is a single Rust item, not a file.
+The solution is a single [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) consisting of about thirty lines of JavaScript, which serves as the main source of truth; based on it, syntax highlighting is provided, formatting is carried out using [Topiary](https://topiary.tweag.io/), and a language server is built on top of [`tower-lsp-server`](https://crates.io/crates/tower-lsp-server). So the syntax tree is the server's model.
 
-Three bets follow from that. One: Cargo parallelises per crate, so a one-line change deep in rustc used 1.4 of her 16 CPUs — "they're good CPUs, but rustc just won't use them, guys". Capillary parallelises per item. Two: target folders. She ran [`ncdu`](https://dev.yorhel.nl/ncdu) live over hers: 57 GB, 22 GB of it in `deps`, and about 16 GB of that identical rlibs duplicated across projects. Queries can evict their own caches and deduplicate. Three: queries in rustc and [Salsa](https://github.com/salsa-rs/salsa) run sub-queries one at a time, so she made hers `async`. "We just turn everything async, and somehow that works."
+The various intelligent feature that you expect in a text editor: hover, diagnostics, completion, go-to-definition, and rename—work by matching the node under the cursor with its parent. Since the keywords are generated when the program is compiled, altering the grammar causes the server to fail during the building process. Which is exactly in the way we would expect it to be.
 
-The line that stuck with me: "Please never implement name resolution."
+I was very interested in this project. I maintain [`zed-mjml`](https://github.com/pataruco/zed-mjml), a Zed extension for [MJML](https://mjml.io), and I [wrote an article](https://pataruco.dev/blog/wasm-beyond-the-browser-and-back-again) about building it back in March 2026. I took the same approach but used two shortcuts: I used the `tree-sitter-html` grammar and only prepared the query files since MJML is just HTML with different tag names; and the diagnostics are provided by [`mrml`](https://github.com/jdrouet/mrml), which is an actual MJML parser, not by the syntax tree.
 
-## Timo Bachmann — Rebuilding the Tower of Babel: write your own language server with Tree-sitter
-
-[Timo](https://github.com/tfachmann) is a robotics researcher at the German Aerospace Center, and the problem is wonderfully specific. A colleague wrote a process manager in 2010 — "that was the year of domain-specific languages, so of course he invented something" — and its config language now runs thirteen robots with about 200 users. "Which is quite some, but just not enough to do tooling." Every editor shows it in black and white.
-
-The fix is one [Tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar, about thirty lines of JavaScript, as the single source of truth. From it: syntax highlighting (even the [Typst](https://typst.app/) slides were highlighted through it), formatting via [Topiary](https://topiary.tweag.io/), and a language server built on [`tower-lsp-server`](https://crates.io/crates/tower-lsp-server). The LSP trait has 68 methods; only two are required. A 5,000-line file parses in about 5 ms and an incremental reparse takes 0.3 ms, so the syntax tree _is_ the server's model.
-
-The intelligence — hover, diagnostics, completion, go-to-definition, rename — is a `match` on the node under your cursor and its parent. And because the keywords are generated at compile time, changing the grammar breaks the server's build. "Exactly how we would expect it to be."
-
-I had a stake in this one. I maintain [zed-mjml](https://github.com/pataruco/zed-mjml), a Zed extension for [MJML](https://mjml.io), and [wrote about building it](https://pataruco.dev/blog/wasm-beyond-the-browser-and-back-again/) back in March. Same road, two shortcuts: I borrowed the `tree-sitter-html` grammar and only wrote the query files, because MJML is HTML with different tag names; and the diagnostics come from [mrml](https://github.com/jdrouet/mrml), a real MJML parser, not from the syntax tree.
-
-Which is exactly the caveat from the Q&A: Tree-sitter carries no semantics. If you already have a compiler — or, in my case, a parser — build on that. Timo's talk was about how trivial it is to start from nothing. Mine started from something, and reached the same place.
-
-## Filip Petkovski — Running safely with scissors: lock-free concurrency for maximum throughput
+## Filip Petkovski: Running safely with scissors: lock-free concurrency for maximum throughput
 
 [Filip](https://fpetkovski.github.io/) builds the internal observability platform at Shopify, and the case study was the in-memory buffer of their metrics database: one writer appending at a constant rate, many readers scanning. They started with an [`RwLock`](https://doc.rust-lang.org/std/sync/struct.RwLock.html). With readers scanning ranges of 1,024 entries, the writer degraded and the readers stalled.
 
