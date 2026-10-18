@@ -67,47 +67,98 @@ The various intelligent feature that you expect in a text editor: hover, diagnos
 
 I was very interested in this project. I maintain [`zed-mjml`](https://github.com/pataruco/zed-mjml), a Zed extension for [MJML](https://mjml.io), and I [wrote an article](https://pataruco.dev/blog/wasm-beyond-the-browser-and-back-again) about building it back in March 2026. I took the same approach but used two shortcuts: I used the `tree-sitter-html` grammar and only prepared the query files since MJML is just HTML with different tag names; and the diagnostics are provided by [`mrml`](https://github.com/jdrouet/mrml), which is an actual MJML parser, not by the syntax tree.
 
-## Filip Petkovski: Running safely with scissors: lock-free concurrency for maximum throughput
+### Filip Petkovski: Running safely with scissors: lock-free concurrency for maximum throughput
 
-[Filip](https://fpetkovski.github.io/) builds the internal observability platform at Shopify, and the case study was the in-memory buffer of their metrics database: one writer appending at a constant rate, many readers scanning. They started with an [`RwLock`](https://doc.rust-lang.org/std/sync/struct.RwLock.html). With readers scanning ranges of 1,024 entries, the writer degraded and the readers stalled.
+[Filip](https://fpetkovski.github.io/) builds the internal observability platform at Shopify, and the case study was the in-memory buffer of their metrics database: one writer appending at a constant rate and many readers scanning.
 
-The design that replaced it has two rules: every memory region has exactly one writer, and inserts are append-only. A fixed-size array never moves and its elements never change, so readers don't need a lock at all; the writer just publishes a watermark atomically. To grow, a pre-allocated "spine" points at segments that each double in size, and the segment count and last-segment length are bit-packed into one atomic. Readers never block the writer. Full stop.
+They started with an [`RwLock`](https://doc.rust-lang.org/std/sync/struct.RwLock.html). So when readers scanned ranges of 1,024 entries, the writer degraded, and the readers stalled.
 
-Then the part I came for. All of this needs `unsafe`, and "performance should not come at the expense of safety". The protocol is invisible to the borrow checker, so safety becomes a contract held up by three things together: the types (the writer isn't `Clone`, `push` takes `&mut self`, storage is a `Box<[UnsafeCell<T>]>` that can't grow), the API surface (readers get no mutating methods), and the implementation (write the value, then `Release` the length; readers `Acquire` it). "It's not enough to just omit the `unsafe` keyword from the function declaration." `std::sync::Mutex` is built exactly the same way.
+The new design has two rules:
 
-The closer was [Miri](https://github.com/rust-lang/miri) catching a swapped publish order that a normal test sailed through. It also planted an idea for how I'd teach ownership: one writer, many readers, acted out as reading and writing. Another post.
+1. Each memory area has only one writer,
+2. New data is only added at the end.
 
-## lcnr — What's next for Rust's type system
+A fixed-size array stays in place, and its items never change, so readers don't need a lock; the writer just updates a marker in one step. To expand, a pre-made "spine" points to segments that each double in size, and the segment count and last-segment length are bit-packed into one atomic: **Readers never stop the writer**.
 
-[lcnr](https://lcnr.de) co-leads the Types team, and the first half of the talk was a reminder that most of its work is invisible. The team's priorities, in order: sound, consistent, evolvable, fast. Sound came with an unsoundness that has been open since 1.0 — eleven years — because fixing it needed years of groundwork and nobody hits it in practice. Consistent came with a one-liner: call the same method twice on an integer literal and get two different results, because the first call pins the type to `i32`. "You only notice them by no longer noticing the ways in which it goes wrong."
+Then the part I was interested in. All of this requires `unsafe` code, but "performance should not sacrifice safety."
 
-Then the good news, delivered deadpan. The [never type](https://doc.rust-lang.org/std/primitive.never.html) — the running joke was that `!` is named after its stabilisation date — ships in Rust 1.100 on the 12th of November. The talk proposal said the next-gen trait solver would "hopefully be done by the time of this conference". It landed three days before. Stable for Christmas, if nothing crops up. [Polonius](https://github.com/rust-lang/polonius), the new borrow checker, is on nightly.
+The system is not checked by the borrow checker, so safety depends on three things working together:
 
-That foundation is what unblocks the things people actually ask for: `impl Trait` in type aliases, const traits, richer const generics, and new implicit bounds (`MetaSized`, `Move`, `Forget`) aimed at the problems `Pin` currently papers over. There are 33 open project goals on the type system alone.
+1. The types (the writer cannot be copied, `push` requires exclusive access, storage is a fixed-size boxed array that cannot grow),
+2. The API (readers cannot change data),
+3. How the API works (write the value, then update the length with `Release`; readers read it with `Acquire`).
 
-The closing line, repeated throughout: "It works better if we have money."
+### lcnr — What's next for Rust's type system
 
-## Johan Rosengren & Sergio Gonzalez Martin — Image codecs rustification in Chromium
+[lcnr](https://lcnr.de) co-leads the Types team, and the first half of the talk was a reminder that most of its work is invisible.
 
-[Johan](https://eurorust.eu/talks/image-codecs-rustification-in-chromium/) and [Sergio](https://github.com/telecos) are on the Microsoft Edge security team, working with Chrome's, and they closed day one with its most grounded talk. Why image decoders? "The browser doesn't choose the input. The attacker does." The vulnerability pattern is always the same: a wrong size calculation followed by a memory copy that trusts it. The 2023 [libwebp bug](https://nvd.nist.gov/vuln/detail/CVE-2023-4863) was a miscalculated Huffman table, exploited in the wild. In Rust, "the bug is still a bug, but it's not an exploitable one."
+The team's priorities, in order, are:
 
-Google's PNG port was the icebreaker: about two years, mostly spent fixing Chromium's Rust infrastructure rather than decoding PNGs. "PNG paid the cost that every project that came after would benefit from." Microsoft's BMP and ICO work rode on it. Upstreaming resumable BMP decoding into the [`image`](https://crates.io/crates/image) crate meant turning one unreviewable PR into more than ten small ones.
+- sound,
+- consistent
+- evolvable
+- fast.
 
-The sentence I'd frame came from the ICO work: "as soon as it hits that FFI boundary, it's no longer just metadata. You're signing a contract." The Rust decoder reported 128×128 as the largest frame, Blink locked that in, then 256×256 arrived and the browser crashed. The sizes were in the file all along.
+Soundness has been an open issue since 1.0, because fixing it required years of groundwork, and nobody hits it in practice.
 
-Shipping to a billion users is a process, not a rewrite: feature flag, differential tests against the C++ decoder, Canary, Finch, then hold for two or three stable releases and delete the C++. "The Rust code was actually the nice thing. It was the integration hell that we all love."
+Consistent is calling the same method twice on an integer literal and get two different results, because the first call pins the type to `i32`.So you only notice it by no longer noticing the ways it goes wrong.
 
-_Day two — Friday 16 October_
+Then the good news: The [never type](https://doc.rust-lang.org/std/primitive.never.html) ships in Rust 1.100, and [Polonius](https://github.com/rust-lang/polonius), the new borrow checker, is on nightly.
 
-## Cristián Maureira-Fredes — Rust's influence on C++ and Python: shaping the future of three communities
+That foundation is what unblocks the things people actually ask for: `impl Trait` in type aliases, const traits, richer const generics, and new implicit bounds (`MetaSized`, `Move`, `Forget`)
 
-Day two opened with a keynote from outside the bubble. [Cristián](https://maureira.dev) works on PySide, the Python bindings for Qt, and was just elected vice chair of the Python Software Foundation — "a serial conference organiser, not a serial killer". The thesis: "much of what is coming in Rust is most likely being shaped outside the Rust ecosystem." And the question: "Are you all prepared if 30 million people just come to the Rust ecosystem?"
+## Johan Rosengren & Sergio Gonzalez Martin: Image codecs rustification in Chromium
 
-The C++ half was a safety-crisis timeline: decades of RAII, MISRA, smart pointers and sanitisers, then the NSA, CISA, the White House and the EU's [Cyber Resilience Act](https://en.wikipedia.org/wiki/Cyber_Resilience_Act) all saying "do not use unsafe languages". Three responses — Profiles (opt-in, missed C++26), [Circle](https://safecpp.org/) (a real borrow checker, rejected), [Carbon](https://github.com/carbon-language/carbon-lang) — and five to ten years of mixed codebases ahead. Which makes bindings the main thing: bindgen, CXX, autocxx, Crubit, Zngur, Diplomat. "Six ways. Which one is the one that we should use?"
+[Johan](https://eurorust.eu/talks/image-codecs-rustification-in-chromium/) and [Sergio](https://github.com/telecos) are on the Microsoft Edge security team, working with Chromium/
 
-The Python half was where the numbers got silly. [PyO3](https://pyo3.rs/) and [Maturin](https://www.maturin.rs/) made Rust the easy choice for native extensions. The `rpds` crate has modest download numbers on crates.io; its Python binding, [`rpds-py`](https://pypi.org/project/rpds-py/), hit roughly 470 million downloads in thirty days the moment `jsonschema` adopted it. "Surprise, now you have almost half a billion users more." And who is paying that maintainer?
+They talked about **Why image decoders?** saying that:
 
-The ask wasn't a call to arms but a call to action: "please look at your neighbours, because they are already looking at you."
+> The browser doesn't choose the input. The attacker does.
+
+Vulnerability patterns are similar: a wrong size calculation followed by a memory copy that trusts it.
+
+So in Rust, **"the bug is still a bug, but it's not an exploitable one."**
+
+They found that working on Google's PNG port was the icebreaker after about two years, mostly spent fixing Chromium's Rust infrastructure rather than decoding PNGs. Just using the [`image`](https://crates.io/crates/image) crate meant they squash so many vulnerabilities.
+
+## Day two
+
+## Cristián Maureira-Fredes: Rust's influence on C++ and Python: shaping the future of three communities
+
+Day two opened with a keynote from outside the bubble. [Cristián](https://maureira.dev) works on PySide, the Python bindings for Qt, and was just elected vice chair of the Python Software Foundation.
+
+His thesis is:
+
+> much of what is coming in Rust is most likely being shaped outside the Rust ecosystem.
+
+Most of them from C++ and Python.
+
+The C++ half because a safety-crisis timeline: decades of RAII, MISRA, smart pointers and sanitisers, then the NSA, CISA, the White House and the EU's [Cyber Resilience Act](https://en.wikipedia.org/wiki/Cyber_Resilience_Act) all saying "do not use unsafe languages".
+
+So three responses came in:
+
+- Profiles (opt-in, missed C++26),
+- [Circle](https://safecpp.org/) (a real borrow checker, rejected),
+- [Carbon](https://github.com/carbon-language/carbon-lang) — and five to ten years of mixed codebases ahead.
+
+Which makes bindings the main thing:
+
+- [bindgen](https://github.com/rust-lang/rust-bindgen),
+- [CXX](https://cxx.rs/),
+- [autocxx](https://github.com/google/autocxx),
+- [Crubit](https://github.com/google/crubit),
+- [Zngur](https://github.com/HKalbasi/zngur),
+- [Diplomat](https://github.com/rust-diplomat/diplomat).
+
+So it is six ways, but which one is the one that we should use?
+
+The Python half: [PyO3](https://pyo3.rs/) and [Maturin](https://www.maturin.rs/) made Rust the easy choice for native extensions. The `rpds` crate has modest download numbers on crates.io; its Python binding, [`rpds-py`](https://pypi.org/project/rpds-py/), hit roughly 470 million downloads in thirty days the moment `jsonschema` adopted it.
+
+He joked saying
+
+> "Surprise, now you have almost half a billion users more." And who is paying that maintainer?
+
+From my point of view, he was asking about that Rust consumers are now coming from C++ and Python.
 
 ## Sanskar Jaiswal — Designing state machines for streaming proxies in Rust
 
