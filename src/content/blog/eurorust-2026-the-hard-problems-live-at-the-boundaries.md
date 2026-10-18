@@ -1,7 +1,7 @@
 ---
 title: 'EuroRust 2026: the hard problems live at the boundaries'
 date: 2026-10-18T00:00:00.000Z
-excerpt: "In Barcelona we had two days, fourteen talks, one thread: the compiler fulfils most of Rust's promises, but at each boundary the guarantees turn into contracts which you have to keep"
+excerpt: "EuroRust 2026 my notes and takeaways: the compiler fulfils most of Rust's promises, but at each boundary the guarantees turn into contracts which you have to keep"
 slug: eurorust-2026-the-hard-problems-live-at-the-boundaries
 ---
 
