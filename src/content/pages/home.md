@@ -23,6 +23,6 @@ Upon graduation, they were crazy enough to invite me to join the [faculty](https
 - ~~Junior Web Developer at [33](https://www.thirtythreeglobal.com/)~~
 - ~~Senior Software Engineer Consultant at [Red Badger](https://red-badger.com/)~~
 - ~~Teaching assistant at [General Assembly](https://ga.co)~~
-- Distinguished Faculty Member (fancy name for a tech teacher) at [General Assembly](https://ga.co)
 - ~~Tech lead consultant at [101 Ways](https://www.101ways.com/)~~
+- ~~Distinguished Faculty Member (fancy name for a tech teacher) at [General Assembly](https://ga.co)~~
 - Senior Software Engineer Consultant at [Red Badger](https://red-badger.com/) (again)

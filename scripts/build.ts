@@ -6,6 +6,13 @@ import matter from 'gray-matter';
 import { Marked } from 'marked';
 import { createHighlighter } from 'shiki';
 
+// tsx does not read .env on its own; pick up BASE_PATH from it when present.
+try {
+  process.loadEnvFile();
+} catch {
+  // no .env file, fall back to the shell environment / default below
+}
+
 const BASE_URL = 'https://www.pataruco.dev';
 // Path prefix for deployment (e.g., '/blog/' for GitHub Pages, '/' for custom domain)
 // const BASE_PATH = process.env.BASE_PATH || '/blog/';
@@ -114,7 +121,9 @@ async function run() {
     const { data, content } = matter(raw);
     const htmlContent = await marked.parse(content);
     const slug = data.slug || path.basename(file, '.md');
-    const postPath = `blog/${slug}`;
+    // Trailing slash: posts are written as blog/<slug>/index.html, so this is
+    // the URL every static host serves directly, with no redirect.
+    const postPath = `blog/${slug}/`;
 
     const jsonLd = {
       '@context': 'https://schema.org',
@@ -168,7 +177,7 @@ async function run() {
           path="${post.slug}"
         >
           <article class="entry">
-            <a href="${BASE_PATH}blog/${post.slug}">
+            <a href="${BASE_PATH}${post.path}">
               <h2>${post.title}</h2>
             </a>
             <p>${post.excerpt}</p>
@@ -268,7 +277,7 @@ async function run() {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>${BASE_URL}/</loc><lastmod>${new Date().toISOString()}</lastmod></url>
-  <url><loc>${BASE_URL}/blog</loc><lastmod>${new Date().toISOString()}</lastmod></url>
+  <url><loc>${BASE_URL}/blog/</loc><lastmod>${new Date().toISOString()}</lastmod></url>
   <url><loc>${BASE_URL}/installfest</loc><lastmod>${new Date().toISOString()}</lastmod></url>
   ${sitemapItems}
 </urlset>`;
