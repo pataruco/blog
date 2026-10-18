@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.1](https://github.com/pataruco/blog/compare/blog-v1.8.0...blog-v1.8.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* change eurorust excerpt ([7263ae3](https://github.com/pataruco/blog/commit/7263ae3bd869ec832c848d0d7392d293481d3afb))
+* change eurorust excerpt ([8eb63ac](https://github.com/pataruco/blog/commit/8eb63ac67531ca43df3c0044c4533816c787f3ca))
+
 ## [1.8.0](https://github.com/pataruco/blog/compare/blog-v1.7.0...blog-v1.8.0) (2026-10-18)
 
 
