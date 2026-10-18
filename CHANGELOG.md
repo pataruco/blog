@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/pataruco/blog/compare/blog-v1.7.0...blog-v1.8.0) (2026-10-18)
+
+
+### Features
+
+* eurorust ([9dc7f12](https://github.com/pataruco/blog/commit/9dc7f12ebe5b061284de55525d2b1ceb60d0067d))
+* eurorust blog post ([748ff2d](https://github.com/pataruco/blog/commit/748ff2ddfb4b52f30f0858adc31d1ddee0be174c))
+
 ## [1.7.0](https://github.com/pataruco/blog/compare/blog-v1.6.1...blog-v1.7.0) (2026-03-20)
 
 
