@@ -15,27 +15,31 @@ Here's what I took away, in the order the talks happened, but TL;DR:
 
 ## Day one
 
-### Oli Scherer — Move your problems to compile-time and get new capabilities out of it
+### Oli Scherer: Move your problems to compile-time and get new capabilities out of it
 
-[Oli](https://github.com/oli-obk/) opened the conference with a history lesson that turned into a roadmap. Rust 1.0 shipped with _two_ const evaluators — one for statics, one for consts — and they didn't agree on which programs were valid. When `const fn` landed in Rust 1.31, instead of fixing both, the team added a third evaluator, sharing its core with [Miri](https://github.com/rust-lang/miri), and deleted the other two. It was so powerful they had to add code to restrict it.
+[Oli](https://github.com/oli-obk/) opened the conference with a history lesson that turned into a roadmap. Rust 1.0 came with _two_ constant evaluators: one for static values, one for constants, and they didn't agree on which programs were valid. When `const fn` arrived in Rust 1.31, instead of fixing both, the team added a third evaluator, sharing its core with [Miri](https://github.com/rust-lang/miri), and removed the other two. It was so powerful they had to add code to limit it.
 
-Every slow stabilisation since follows the same pattern. Mutable references in `const` took about fifty releases, because "we are either fixing the edge cases or forbidding the edge cases".
+Every slow update since follows the same pattern. Mutable references in `const` took about fifty releases because "we are either fixing the tricky cases or banning the tricky cases".
 
-The roadmap is compile-time reflection. The current design is called "type info" — "Very boring. Don't let compiler developers name things" — and it turns [`TypeId`](https://doc.rust-lang.org/std/any/struct.TypeId.html) into a first-class value you can walk at compile time: names, variants, fields, field types. Once you can do that, you can serialise anything, and therefore debug anything, without a `derive` in sight. Coming soon: a JSON config parsed by the compiler straight into a static on an embedded target.
+The roadmap now is compile-time reflection and the current design is called "type info". But it turns [`TypeId`](https://doc.rust-lang.org/std/any/struct.TypeId.html) into a main value you can explore during compilation: names, variants, fields, and field types. Once you can do that, you can convert anything into a format for storage, and therefore debug anything, without needing a `derive`.
 
-The hazards got equal time: public fields become semver, parametricity is already broken (`size_of` has been breaking it since 1.0), and `TypeId` only works on `'static` types. But the capability I keep thinking about is "comptime-only" functions — things with no runtime answer at all, like allocating on a compile-time heap and turning the result into a static, or reading a whole asset directory into the binary. Not faster code. New code.
+What was incredible to hear is that coming soon: a JSON config read by the compiler directly into a fixed value on an embedded device.
 
-## Benedikt Wiethof & Theophil Spiegeler Castañeda — The future of unmanned systems is built on Rust
+And the feature I keep thinking about is "comptime-only" functions—things that have no runtime result, like allocating memory at compile time and turning the result into a fixed value, or loading an entire asset folder into the binary.
 
-A sponsored talk from [Quantum Systems](https://quantum-systems.com/), and the one where I wrote "hexagonal architecture → drones!" in my notebook, exclamation mark included.
+## Benedikt Wiethof & Theophil Spiegeler Castañeda: The future of unmanned systems is built on Rust
 
-The problem: every legacy ground-control station assumes one operator and one vehicle. Theophil and Benedikt's team is building Mosaic, a ground-control system for _n_ operators, _m_ vehicles and _k_ stations. The first attempt was in C++. It passed its tests but was fragile — undefined behaviour, dependency pain — and "kinda went into the wrong direction". The Rust rewrite started with "basically zero developers" and took twelve to thirteen months.
+A sponsored talk from [Quantum Systems](https://quantum-systems.com/).
 
-The architecture is a [hexagonal](https://en.wikipedia.org/wiki/Hexagonal_architecture_%28software%29) core per station. Vehicles plug in through [gRPC](https://grpc.io/) drivers that declare their capabilities up front, so a mission plan the drone can't fly is rejected before take-off. Operators get role-based access from a local identity provider. Cores talk to each other as peers over [mTLS](https://en.wikipedia.org/wiki/Mutual_authentication) on [QUIC](https://en.wikipedia.org/wiki/QUIC) — "no leader, no follower" — with exactly one owner per entity and read-only replicas everywhere else. Video is lossy by design and reaches the operator over [WebRTC](https://webrtc.org/) on the last hop.
+The problem: every old ground-control station assumes one operator and one vehicle. Theophil and Benedikt's team is building Mosaic, a ground-control system for multiple operators, vehicles, and stations.
 
-That's what the exclamation mark was about. Strip away the drones and this is the shape of [Crux](https://redbadger.github.io/crux/), the framework we build at [Red Badger](https://red-badger.com/): a pure core that owns the state and the decisions, side effects pushed out to the edges, capabilities declared rather than assumed. They even use the same words — core, capabilities. We reach for that pattern to keep an app testable across iOS, Android and the web. They reach for it where a mistake isn't a failing test. Some patterns are resilient enough to run at military grade, where lives depend on them.
+The first version was in C++. It passed its tests but was fragile and then rewrite in Rust started with "basically zero developers" and took twelve to thirteen months.
 
-They were honest about the cost: an actor-based core means a minor feature touches fifty files. The payoff was a demo video of an interceptor locking on to one of their own target drones at about 300 ms latency, and the closing line: "Rust was the right choice."
+The design uses a [hexagonal](https://en.wikipedia.org/wiki/Hexagonal_architecture_%28software%29) core for each station. Vehicles connect through [gRPC](https://grpc.io/) drivers that list their abilities upfront, so the system rejects any mission plan the drone can't handle before take-off. Operators get role-based access from a local identity system. Cores communicate as equals over secure connections using [mTLS](https://en.wikipedia.org/wiki/Mutual_authentication) on [QUIC](https://en.wikipedia.org/wiki/QUIC), so "no leader, no follower", with exactly one owner per entity and read-only copies everywhere else. Video is intentionally compressed and reaches the operator over [WebRTC](https://webrtc.org/) on the final step.
+
+Now, strip away the drones and this is the shape of [Crux](https://redbadger.github.io/crux/), the framework we build at [Red Badger](https://red-badger.com/): a pure core that owns the state and the decisions, side effects pushed out to the edges, capabilities declared rather than assumed. Victor and Stu did that pattern to keep an app testable across iOS, Android and the Web.
+
+Some patterns are resilient enough to run at military grade.
 
 ## Jana Dönszelmann — Optimizing rustc's next trait solver
 
